@@ -1,8 +1,9 @@
-import { responseGenerator } from '../helpers';
+import { responseGenerator } from '../helpers'
+import AnimalModel from '../models/animal'
 
 class Animal {
-  constructor(model) {
-    this.animal = model;
+  constructor() {
+    this.animal = AnimalModel;
   }
 
   fetch(req, res) {

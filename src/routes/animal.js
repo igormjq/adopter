@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import Controller from '../controllers/animal';
-import Model from '../models/animal';
 
 const router = Router();
-const AnimalController = new Controller(Model);
+const AnimalController = new Controller();
 
 router
   .route('/')
