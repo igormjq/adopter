@@ -44,7 +44,7 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.methods.generateToken = function() {
   const access = 'auth';
-  const token = jwt.sign({ _id: this._id }, access);
+  const token = jwt.sign({ _id: this._id, access }, process.env.JWT_SECRET);
 
   this.tokens.push({ access, token });
 
