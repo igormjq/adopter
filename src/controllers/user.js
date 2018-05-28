@@ -13,10 +13,8 @@ class User {
 
     user
       .save()
-        .then(u => {
-          // console.log(u);
-          res.status(201).send(responseGenerator(201, 'Usuário adicionado'));
-        })
+        .then(newUser => newUser.generateToken())
+        .then(token => res.header('x-auth', token).status(201).send(responseGenerator(201, 'Usuário adicionado')))
         .catch(err => console.log(err));
   }
 }

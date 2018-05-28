@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export const responseGenerator = (status, data, message) => {
   switch(status) {
