@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import _ from 'lodash'
-import { hashPassword, tokenGenerator } from '../helpers'
+import { hashPassword } from '../helpers'
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -26,19 +26,29 @@ const UserSchema = new mongoose.Schema({
   }]
 });
 
+UserSchema.methods.toJSON = function() {
+  return _.pick(this, ['_id', 'email']);
+}
+
 UserSchema.pre('save', function(next) {
-  hashPassword(this.password)
-    .then(hashed => this.password = hashed)
-    .then(next());
+  
+  if(this.isModified('password')) {
+    hashPassword(this.password)
+      .then(hashed => this.password = hashed)
+      .then(() => next());
+  } else {
+    next(); 
+  }
+  
 });
 
 UserSchema.methods.generateToken = function() {
   const access = 'auth';
   const token = jwt.sign({ _id: this._id }, access);
-  
+
   this.tokens.push({ access, token });
 
-  return this.save().then(() => token);
+  return this.save().then(() => token)
 };
 
 const User = mongoose.model('User', UserSchema);

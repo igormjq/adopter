@@ -8,13 +8,14 @@ class User {
   }
 
   create (req, res) {
-    const emailAndPassword = _.pick(req.body, ['email', 'password']);
-    const user = new this.User(emailAndPassword);
+    const user = new this.User(_.pick(req.body, ['email', 'password']));
 
     user
       .save()
-        .then(newUser => newUser.generateToken())
-        .then(token => res.header('x-auth', token).status(201).send(responseGenerator(201, 'Usuário adicionado')))
+        .then(() => user.generateToken())
+        .then(token => {
+          res.header('x-auth', token).status(201).send(responseGenerator(201, user, 'Usuário criado'))
+        })
         .catch(err => console.log(err));
   }
 }
