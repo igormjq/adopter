@@ -1,8 +1,8 @@
 import config from '../config/config';
+import mongoose from '../config/database';
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes';
-import mongoose from './database/connect';
 
 const app = express();
 
