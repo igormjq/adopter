@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 export const responseGenerator = (status, data, message) => {
   switch(status) {
     case 200:
@@ -13,4 +15,10 @@ export const responseGenerator = (status, data, message) => {
       }
     }
   }
+}
+
+export const hashPassword = pass => {
+  const salt = bcrypt.genSaltSync(10);
+
+  return bcrypt.hash(pass, salt);
 }
