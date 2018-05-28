@@ -15,6 +15,19 @@ export const responseGenerator = (status, data, message) => {
         data
       }
     }
+    case 409: {
+      return {
+        status,
+        message
+      }
+    }
+  }
+}
+
+export const handleError = (e, status) => {
+  switch(e.code) {
+    case 11000:
+      return responseGenerator(status, null, 'Email indisponível');
   }
 }
 

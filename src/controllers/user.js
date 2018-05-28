@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { responseGenerator } from '../helpers'
+import { responseGenerator, handleError } from '../helpers'
 import UserModel from '../models/user'
 
 class User {
@@ -16,8 +16,9 @@ class User {
         .then(token => {
           res.header('x-auth', token).status(201).send(responseGenerator(201, user, 'Usuário criado'))
         })
-        .catch(err => console.log(err));
+        .catch(err => res.status(409).send(handleError(err, 409)));
   }
+
 }
 
 export default User;
