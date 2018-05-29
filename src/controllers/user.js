@@ -19,20 +19,18 @@ class User {
         .catch(err => res.status(409).send({ status: 409, message: 'Email já em uso' }));
   }
 
-  login(req, res) {
+  async login(req, res) {
     let { email, password } = req.body;
-    
-    this.User
-      .findByEmailAndPassword(email, password)
-        .then(user => {
-          user.generateToken().then(token => res.header('x-auth', token).send(user))
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(404).send({ status: 404, message: 'Email não encontrado/Senha inválida' })
-        })
-  }
+    let user, token;
 
+    try {
+      user = await this.User.findByEmailAndPassword(email, password);
+      token = await user.generateToken();
+      res.header('x-auth', token).send(user);
+    } catch (e) {
+      res.status(404).send({ status: 404, message: 'Email inexistente/Senha inválida' });
+    }
+  }
 }
 
 export default User;

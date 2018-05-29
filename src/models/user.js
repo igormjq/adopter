@@ -57,9 +57,7 @@ UserSchema.statics.findByEmailAndPassword = function(email, password) {
 
   return this.findOne({ email })
     .then(user => {
-      
       if(!user) {
-        console.log('nao tem ngm');
         return Promise.reject();
       }
 
