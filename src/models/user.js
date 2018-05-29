@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import _ from 'lodash'
+import bcrypt from 'bcryptjs'
 import { hashPassword } from '../helpers'
 
 const UserSchema = new mongoose.Schema({
@@ -52,7 +53,21 @@ UserSchema.methods.generateToken = function() {
   return this.save().then(() => token)
 };
 
-// Only used by the model itself
+UserSchema.statics.findByEmailAndPassword = function(email, password) {
+
+  return this.findOne({ email })
+    .then(user => {
+      
+      if(!user) {
+        console.log('nao tem ngm');
+        return Promise.reject();
+      }
+
+      return bcrypt.compare(password, user.password)
+        .then(isValid => !!isValid ? user : Promise.reject());
+    })
+
+}
 
 UserSchema.statics.findByToken = function(token) {
 

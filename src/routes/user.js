@@ -10,4 +10,10 @@ router
       UserController.create(req, res);
     })
 
+router
+  .route('/login')
+    .post((req, res) => {
+      UserController.login(req, res);
+    });
+
 export default router;
