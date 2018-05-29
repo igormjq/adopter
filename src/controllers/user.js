@@ -16,7 +16,7 @@ class User {
         .then(token => {
           res.header('x-auth', token).status(201).send(responseGenerator(201, user, 'Usuário criado'))
         })
-        .catch(err => res.status(409).send(handleError(err, 409)));
+        .catch(err => res.status(409).send({ status: 409, message: 'Email já em uso' }));
   }
 
 }
