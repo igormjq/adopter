@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
       if(!user)
         return Promise.reject()
       
-      req.user = user;
+      req.user = user; // binds user to the request object to be consumed by the next middleware in the stack
       req.token = token;
 
       next()

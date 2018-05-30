@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { responseGenerator } from '../helpers'
 import AnimalModel from '../models/animal'
 
@@ -13,11 +14,21 @@ class Animal {
   }
 
   create(req, res) {
-    const animal = req.body;
+    const { body: animal , user: creator } = req;
+    console.log('creator', creator);
 
-    this.animal.create(animal)
+    this.animal.create(Animal.createAnimal(animal, creator))
       .then(data => res.status(201).send(responseGenerator(201, data, 'Animal inserido com sucesso')))
       .catch(err => res.status(400).send(err.message));
+  }
+
+  static createAnimal (data, creator) {
+    
+    let animal = _.pick(data, ['name', 'type', 'gender', 'size', 'castraded', 'vacinated', 'description']);
+    animal.createdAt = new Date();
+    animal._creator = creator;
+
+    return animal
   }
 }
 

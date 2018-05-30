@@ -30,7 +30,8 @@ const AnimalSchema = new mongoose.Schema({
     type: Boolean
   },
   isAvailabe: {
-    type: Boolean
+    type: Boolean,
+    default: true
   },
   description: {
     type: String,
