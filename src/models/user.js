@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
+import validator from 'validator'
 import _ from 'lodash'
 import bcrypt from 'bcryptjs'
 import { hashPassword } from '../helpers'
@@ -9,7 +10,16 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true
+    unique: true,
+    validate: {
+      validator: value => validator.isEmail(value),
+      message: '{VALUE} não é um email válido'
+    }
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true
   },
   password: {
     type: String,
@@ -29,7 +39,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.toJSON = function() {
-  return _.pick(this, ['_id', 'email']);
+  return _.pick(this, ['_id', 'email', 'name']);
 }
 
 UserSchema.pre('save', function(next) {
