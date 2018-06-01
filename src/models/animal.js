@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+import _ from 'lodash'
 
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -29,7 +30,7 @@ const AnimalSchema = new mongoose.Schema({
   vacinated: {
     type: Boolean
   },
-  isAvailabe: {
+  isAvailable: {
     type: Boolean,
     default: true
   },
@@ -41,10 +42,18 @@ const AnimalSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
   },
+  updatedAt: {
+    type: Date,
+    default: null
+  },
   _creator: {
     type: ObjectId,
   }
 });
+
+AnimalSchema.methods.toJSON = function() {
+  return _.pick(this, ['name', 'gender', 'size', 'castrated', 'vacinated', 'description'])
+}
 
 const Animal = mongoose.model('Animal', AnimalSchema);
 

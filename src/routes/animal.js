@@ -15,4 +15,11 @@ router
     AnimalController.create(req, res);
   });
 
+router
+  .use(auth)
+  .route('/:id')
+    .patch((req, res) => {
+      AnimalController.updateById(req, res);
+    })
+
 export default router;
