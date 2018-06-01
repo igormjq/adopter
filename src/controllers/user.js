@@ -1,14 +1,18 @@
 import _ from 'lodash'
-import { responseGenerator, handleError } from '../helpers'
-import UserModel from '../models/user'
+import { responseGenerator } from '../helpers/'
+import UserModel from '../models/user/user'
+import InstitutionModel from '../models/user/institution'
+import PersonModel from '../models/user/person'
 
 class User {
   constructor() {
-    this.User = UserModel
+    this.User = UserModel,
+    this.Institution = InstitutionModel,
+    this.Person = PersonModel
   }
 
   create (req, res) {
-    const user = new this.User(_.pick(req.body, ['email', 'password', 'name']));
+    let user = this._defineUser(req.body);
 
     user
       .save()
@@ -32,6 +36,19 @@ class User {
       res.header('x-auth', token).send(user);
     } catch (e) {
       res.status(404).send({ status: 404, message: 'Email inexistente/Senha inválida' });
+    }
+  }
+
+  _defineUser(user) {
+    let props = ['email', 'password', 'name', 'phone', 'role'];
+
+    switch(user.role) {
+      case 'institution':
+        props.push('about', 'cnpj');
+        return user = new this.Institution(_.pick(user, props));
+      case 'person':
+        props.push('cpf', 'address');
+        return user = new this.Person(_.pick(user, props));
     }
   }
 
