@@ -1,10 +1,12 @@
 import _ from 'lodash'
 import { responseGenerator } from '../helpers/'
+import UserModel from '../models/user/user'
 import InstitutionModel from '../models/user/institution'
 import PersonModel from '../models/user/person'
 
 class User {
   constructor() {
+    this.User = UserModel,
     this.Institution = InstitutionModel,
     this.Person = PersonModel
   }
