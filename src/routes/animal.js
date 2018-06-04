@@ -21,5 +21,8 @@ router
     .patch((req, res) => {
       AnimalController.updateById(req, res);
     })
+    .delete((req, res) => {
+      AnimalController.delete(req, res);
+    });
 
 export default router;

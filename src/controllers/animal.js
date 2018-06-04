@@ -21,6 +21,25 @@ class Animal {
       .catch(err => res.status(400).send(err.message));
   }
 
+  delete(req, res) {
+    const _id = req.params.id;
+    const _creator = req.user._id;
+    const query = { _id, _creator };
+
+    if(!isValidId(_id)) {
+      return res.status(400).send({ status: 400, message: 'ID inválido' });
+    }
+
+    this.Animal.findOneAndRemove(query)
+      .then(deleted => {
+        if(!deleted) {
+          return res.status(404).send({ status: 404, message: 'Não encontrado' });
+        }
+        res.status(204).send({ status: 204, message: `${deleted._id} removido com sucesso` });
+      })
+      .catch(err => console.log(err))
+  }
+
   updateById(req, res) {
     const options = { new: true };
     const _id = req.params.id;
@@ -41,7 +60,7 @@ class Animal {
           if(!animal) {
             return res.send(responseGenerator(403, null, 'Forbidden'));
           }
-          res.send(responseGenerator(200, animal, `Animal ${animal._id} atualizado`))
+          res.send(responseGenerator(201, animal, `Animal ${animal._id} atualizado`))
         })
         .catch(err => console.log(err));
   }
