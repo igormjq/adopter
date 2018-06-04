@@ -41,6 +41,13 @@ const AnimalSchema = new mongoose.Schema({
     trim: true,
     required: true
   },
+  imageUrl: {
+    type: String,
+    validate: {
+      validator: value => validator.isURL(value),
+      message: '{VALUE} não é uma URL válida'
+    }
+  },
   createdAt: {
     type: Date,
   },
@@ -54,7 +61,7 @@ const AnimalSchema = new mongoose.Schema({
 });
 
 AnimalSchema.methods.toJSON = function() {
-  return _.pick(this, ['_id', 'name', 'type', 'gender', 'size', 'castrated', 'vacinated', 'description', 'createdAt'])
+  return _.pick(this, ['_id', 'name', 'type', 'gender', 'size', 'castrated', 'vacinated', 'description', 'imageUrl', 'createdAt'])
 }
 
 const Animal = mongoose.model('Animal', AnimalSchema);
