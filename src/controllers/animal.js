@@ -48,7 +48,7 @@ class Animal {
   
   static createAnimal (data, creator) {
     
-    let animal = _.pick(data, ['name', 'type', 'gender', 'size', 'castraded', 'vacinated', 'description']);
+    let animal = _.pick(data, ['name', 'type', 'gender', 'size', 'castrated', 'vacinated', 'description']);
     animal.createdAt = new Date();
     animal._creator = creator;
 

@@ -17,9 +17,7 @@ class User {
     user
       .save()
         .then(() => user.generateToken())
-        .then(token => {
-          res.header('x-auth', token).status(201).send(responseGenerator(201, user, 'Usuário criado'))
-        })
+        .then(token => res.header('x-auth', token).status(201).send(responseGenerator(201, user, 'Usuário criado')))
         .catch(e => {
           let { status, message, invalid_data } = User.sendError(e); 
           res.status(status).send({ status, message, invalid_data })
@@ -40,8 +38,9 @@ class User {
   }
 
   _defineUser(user) {
-    let props = ['email', 'password', 'name', 'phone', 'role'];
-
+    let props = ['email', 'password', 'name', 'phone', 'role', 'createdAt'];
+    user.createdAt = new Date();
+    
     switch(user.role) {
       case 'institution':
         props.push('about', 'cnpj');

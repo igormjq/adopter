@@ -39,6 +39,13 @@ const UserSchema = new mongoose.Schema({
     required: true,
     enum: ['institution', 'person', 'default']
   },
+  createdAt: {
+    type: Date
+  },
+  updatedAt: {
+    type: Date,
+    default: null
+  },
   tokens: [{
     access: {
       type: String,
@@ -52,7 +59,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.toJSON = function() {
-  return _.pick(this, ['_id', 'email', 'name']);
+  return _.pick(this, ['_id', 'email', 'name', 'phone', 'address', 'cpf', 'cnpj', 'about', 'website', 'createdAt']);
 }
 
 UserSchema.pre('save', function(next) {

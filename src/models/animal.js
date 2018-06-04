@@ -25,10 +25,12 @@ const AnimalSchema = new mongoose.Schema({
     enum: ['xs', 's', 'm', 'l', 'xl']
   },
   castrated: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   vacinated: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   isAvailable: {
     type: Boolean,
@@ -52,7 +54,7 @@ const AnimalSchema = new mongoose.Schema({
 });
 
 AnimalSchema.methods.toJSON = function() {
-  return _.pick(this, ['name', 'gender', 'size', 'castrated', 'vacinated', 'description'])
+  return _.pick(this, ['_id', 'name', 'type', 'gender', 'size', 'castrated', 'vacinated', 'description', 'createdAt'])
 }
 
 const Animal = mongoose.model('Animal', AnimalSchema);
