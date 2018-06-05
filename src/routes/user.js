@@ -17,6 +17,12 @@ router
     .post((req, res) => {
       UserController.login(req, res);
     });
+
+router
+  .use(auth)
+  .get('/me', (req, res) => {
+    UserController.findByToken(req, res);
+  })
   
 // router
 //   .use(auth, checkUser)

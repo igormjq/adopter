@@ -36,6 +36,10 @@ class User {
       res.status(404).send({ status: 404, message: 'Email inexistente/Senha inválida' });
     }
   }
+  
+  findByToken(req, res) {
+    res.send(req.user);
+  }
 
   _defineUser(user) {
     let props = ['email', 'password', 'name', 'phone', 'role', 'createdAt'];

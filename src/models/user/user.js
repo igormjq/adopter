@@ -29,15 +29,15 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-    // validate: {
-    //   validator: value => validator.isMobilePhone(value, 'pt-BR'),
-    //   message: 'Telefone inválido'
-    // }
+    validate: {
+      validator: value => validator.isMobilePhone(value, 'pt-BR'),
+      message: 'Telefone inválido'
+    }
   },
   role: {
     type: String,
     required: true,
-    enum: ['institution', 'person', 'default']
+    enum: ['institution', 'person']
   },
   createdAt: {
     type: Date
