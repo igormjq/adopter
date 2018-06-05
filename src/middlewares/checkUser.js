@@ -1,11 +1,11 @@
 const checkUser = (req, res, next) => {
-  console.log(req.user);
-  if(req.user.role === 'person') {
-    console.log('é pessoa')
-  } else {
-    console.log('institution');
+  
+  if(req.user.role === 'institution') {
+    return next()
   }
-  next()
+
+  return res.status(401).send({ status: 401, message: 'Não autorizado' });
+
 }
 
 export default checkUser;

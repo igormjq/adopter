@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const { ObjectID } = mongoose.Schema.Types;
+const { ObjectId } = mongoose.Schema.Types;
 
 const EventSchema = new mongoose.Schema({
   title: {
@@ -15,6 +15,9 @@ const EventSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true
+  },
+  createdAt: {
+    type: Date,
   },
   _institutionId: {
     type: ObjectId,
