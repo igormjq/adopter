@@ -9,7 +9,7 @@ class Animal {
 
   fetch(req, res) {
     this.Animal.find({})
-      .then(animals => res.status(200).send(responseGenerator(200, animals)))
+      .then(animals => res.status(200).send(animals))
       .catch(err => res.status(400).send(err.message))
   }
 
@@ -17,7 +17,7 @@ class Animal {
     const { body: animal , user: creator } = req;
 
     this.Animal.create(Animal.createAnimal(animal, creator))
-      .then(data => res.status(201).send(responseGenerator(201, data, 'Animal inserido com sucesso')))
+      .then(data => res.status(201).send({ message: 'Dado inserido com sucesso', data }))
       .catch(err => res.status(400).send(err.message));
   }
 
@@ -27,15 +27,15 @@ class Animal {
     const query = { _id, _creator };
 
     if(!isValidId(_id)) {
-      return res.status(400).send({ status: 400, message: 'ID inválido' });
+      return res.status(400).send({ message: 'ID inválido' });
     }
 
     this.Animal.findOneAndRemove(query)
       .then(deleted => {
         if(!deleted) {
-          return res.status(404).send({ status: 404, message: 'Não encontrado' });
+          return res.status(404).send({ message: 'Não encontrado' });
         }
-        res.status(204).send({ status: 204, message: `${deleted._id} removido com sucesso` });
+        res.status(204).send({ message: `${deleted._id} removido com sucesso` });
       })
       .catch(err => console.log(err))
   }
@@ -50,7 +50,7 @@ class Animal {
     update.updatedAt = new Date();
 
     if(!isValidId(_id)) {
-      return res.status(400).send({ status: 400, message: 'ID inválido' });
+      return res.status(400).send({ message: 'ID inválido' });
     }
 
     this.Animal
@@ -58,9 +58,10 @@ class Animal {
         .then(animal => {
           
           if(!animal) {
-            return res.send(responseGenerator(403, null, 'Forbidden'));
+            return res.send({ message: 'Proibido' })
           }
-          res.send(responseGenerator(201, animal, `Animal ${animal._id} atualizado`))
+
+          res.send({ message: 'Dado atualizado', data: animal })
         })
         .catch(err => console.log(err));
   }

@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import { responseGenerator } from '../helpers/'
 import UserModel from '../models/user/user'
 import InstitutionModel from '../models/user/institution'
 import PersonModel from '../models/user/person'
@@ -17,7 +16,7 @@ class User {
     user
       .save()
         .then(() => user.generateToken())
-        .then(token => res.header('x-auth', token).status(201).send(responseGenerator(201, user, 'Usuário criado')))
+        .then(token => res.header('x-auth', token).status(201).send({ message: 'Usuário criado', user }))
         .catch(e => {
           let { status, message, invalid_data } = User.sendError(e); 
           res.status(status).send({ status, message, invalid_data })
@@ -33,7 +32,7 @@ class User {
       token = await user.generateToken();
       res.header('x-auth', token).send(user);
     } catch (e) {
-      res.status(404).send({ status: 404, message: 'Email inexistente/Senha inválida' });
+      res.status(404).send({ message: 'Email inexistente/Senha inválida' });
     }
   }
   
