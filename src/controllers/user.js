@@ -13,6 +13,9 @@ class User {
   create (req, res) {
     let user = this._defineUser(req.body);
 
+    if(!user)
+      return res.status(400);
+
     user
       .save()
         .then(() => user.generateToken())
