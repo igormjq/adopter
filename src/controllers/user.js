@@ -67,6 +67,9 @@ class User {
     } else if (e.code === 11000) {
       error.status = 409,
       error.message = 'Email já em uso'
+    } else {
+      error.status = 400;
+      error.message = 'Bad request'
     }
 
     return error;
