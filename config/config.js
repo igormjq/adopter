@@ -9,5 +9,5 @@ if (env === 'test' || env === 'development') {
   
   Reflect.ownKeys(envConfig).forEach(key => process.env[key] = envConfig[key])
 }
-
+// production key mongodb://admin:adopteradmin@ds119800.mlab.com:19800/adopter-api
 // console.log(config);
