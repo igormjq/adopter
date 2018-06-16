@@ -7,6 +7,7 @@ const PersonUserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    sparse: true,
     validate: {
       validator: value => validator.isLength(value, { min: 11, max: 11 }),
       message: 'CPF inválido'

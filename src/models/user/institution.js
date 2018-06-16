@@ -5,6 +5,7 @@ const InstitutionSchema = new mongoose.Schema({
   cnpj: {
     type: String,
     unique: true,
+    sparse: true,
     default: null
   },
   about: {
