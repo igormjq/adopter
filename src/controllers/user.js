@@ -2,6 +2,7 @@ import _ from 'lodash'
 import UserModel from '../models/user/user'
 import InstitutionModel from '../models/user/institution'
 import PersonModel from '../models/user/person'
+import { isValidId } from '../helpers/'
 
 class User {
   constructor() {
@@ -24,6 +25,27 @@ class User {
           let { status, message, invalid_data } = User.sendError(e); 
           res.status(status).send({ status, message, invalid_data })
         });
+  }
+
+  update (req, res) {
+    let update = _.pick(req.body, ['name', 'email', 'phone', 'address', 'about', 'website']);
+    const options = { new: true };
+    const _id = req.params.id;
+    update.updatedAt = new Date();
+
+    if(!isValidId(_id)) {
+      return res.status(400).send({ message: 'ID Inválido' });
+    } else if (!(req.user._id.toString() === _id)) {
+      return res.status(401).send({ message: 'Forbidden' });
+    }
+
+    req.user.role === 'person' ? this.Person : this.Institution
+      .findByIdAndUpdate(_id, { $set: update }, options)
+        .then(user => {
+          res.send({ message: 'Updated', data: user });
+        })
+        .catch(err => res.status(400).send('Não foi possivel realizar a tarefa'));
+
   }
 
   async login(req, res) {

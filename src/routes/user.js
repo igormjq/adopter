@@ -23,7 +23,13 @@ router
   .get('/me', (req, res) => {
     UserController.findByToken(req, res);
   })
-  
+
+router
+  .use(auth)
+    .patch('/:id', (req, res) => {
+      UserController.update(req, res);
+    })
+    
 // router
 //   .use(auth, checkUser)
 //   .route('/admin')
