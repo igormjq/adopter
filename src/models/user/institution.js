@@ -4,8 +4,8 @@ import User from './user'
 const InstitutionSchema = new mongoose.Schema({
   cnpj: {
     type: String,
-    unique: true,
-    sparse: true,
+    // unique: true,
+    // sparse: true,
   },
   about: {
     type: String,
