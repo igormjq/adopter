@@ -6,9 +6,12 @@ import bodyParser from 'body-parser';
 import routes from './routes';
 
 const app = express();
+const corsOptions = {
+  exposedHeaders: ['x-auth']
+}
 
 // Middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
