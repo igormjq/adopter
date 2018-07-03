@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
 
   User.findByToken(token)
     .then(user => {
-      
+
       if(!user)
         return Promise.reject()
       

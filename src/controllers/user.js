@@ -32,20 +32,33 @@ class User {
     let update = _.pick(req.body, ['name', 'email', 'phone', 'address', 'about', 'website']);
     const options = { new: true };
     const _id = req.params.id;
+    
     update.updatedAt = new Date();
+
+    console.log('aqui eu vim', req.body)
 
     if(!isValidId(_id)) {
       return res.status(400).send({ message: 'ID Inválido' });
     } else if (!(req.user._id.toString() === _id)) {
       return res.status(401).send({ message: 'Forbidden' });
-    }
+    } 
 
-    req.user.role === 'person' ? this.Person : this.Institution
+    if(req.user.role === 'person') {
+      this.Person
       .findByIdAndUpdate(_id, { $set: update }, options)
         .then(user => {
           res.send({ message: 'Updated', data: user });
         })
         .catch(err => res.status(400).send('Não foi possivel realizar a tarefa'));
+    } else {
+      this.Institution
+        .findByIdAndUpdate(_id, { $set: update }, options)
+        .then(user => {
+          res.send({ message: 'Updated', data: user });
+        })
+        .catch(err => res.status(400).send('Não foi possivel realizar a tarefa'));
+    }
+      
 
   }
 
