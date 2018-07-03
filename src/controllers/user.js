@@ -35,8 +35,6 @@ class User {
     
     update.updatedAt = new Date();
 
-    console.log('aqui eu vim', req.body)
-
     if(!isValidId(_id)) {
       return res.status(400).send({ message: 'ID Inválido' });
     } else if (!(req.user._id.toString() === _id)) {
@@ -59,6 +57,36 @@ class User {
         .catch(err => res.status(400).send('Não foi possivel realizar a tarefa'));
     }
       
+
+  }
+
+  remove (req, res) {
+    const _id = req.params.id;
+    console.log('eu')
+
+    if(!isValidId(_id)) {
+      return res.status(400).send({ message: 'ID Inválido' });
+    } else if (!(req.user._id.toString() === _id)) {
+      return res.status(401).send({ message: 'Forbidden' });
+    } 
+
+    if(req.user.role === 'person') {
+      this.Person
+      .findByIdAndRemove(_id)
+        .then(user => {
+          console.log('deu')
+          res.send({ message: 'Deleted'});
+        })
+        .catch(err => res.status(400).send('Não foi possivel realizar a tarefa'));
+    } else {
+      this.Institution
+      .findByIdAndRemove(_id)
+      .then(user => {
+        res.send({ message: 'Deleted'});
+      })
+      .catch(err => res.status(400).send('Não foi possivel realizar a tarefa'));
+  
+    }
 
   }
 

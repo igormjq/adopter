@@ -26,9 +26,13 @@ router
 
 router
   .use(auth)
-    .patch('/:id', (req, res) => {
-      UserController.update(req, res);
-    })
+    .route('/:id')
+      .patch((req, res) => {
+        UserController.update(req, res);
+      })
+      .delete((req, res) => {
+        UserController.remove(req, res);
+      })
     
 // router
 //   .use(auth, checkUser)
