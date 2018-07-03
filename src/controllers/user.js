@@ -22,6 +22,7 @@ class User {
         .then(() => user.generateToken())
         .then(token => res.header('x-auth', token).status(201).send({ message: 'Usuário criado', user }))
         .catch(e => {
+          console.log(e)
           let { status, message, invalid_data } = User.sendError(e); 
           res.status(status).send({ status, message, invalid_data })
         });
