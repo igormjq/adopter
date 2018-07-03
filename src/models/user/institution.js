@@ -6,7 +6,6 @@ const InstitutionSchema = new mongoose.Schema({
     type: String,
     unique: true,
     sparse: true,
-    default: null
   },
   about: {
     type: String,
