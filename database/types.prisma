@@ -1,0 +1,74 @@
+type User {
+  id: ID! @unique
+  email: String! @unique
+  password: String!
+  name: String!
+  cpf: String
+  cnpj: String
+  phone: String!
+  address: String!
+  animals: [Animal!]! @relation(name: "OwnerToAnimal", onDelete: CASCADE)
+  favoriteAnimals: [Animal!]! @relation(name: "FavoriteAnimals")
+  adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
+  role: UserRoles!
+  createdAt: DateTime!
+}
+
+type Animal {
+  id: ID! @unique
+  owner: User! @relation(name: "OwnerToAnimal")
+  name: String!
+  type: AnimalType!
+  size: AnimalSize!
+  gender: AnimalGender
+  castrated: Boolean!
+  vaccinated: Boolean!
+  available: Boolean! @default(value: true)
+  about: String!
+  likedBy: [User!]! @relation(name: "FavoriteAnimals")
+  requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
+  createdAt: DateTime!
+}
+
+type AdoptionRequest {
+  id: ID! @unique
+  animal: Animal! @relation(name: "AnimalToAdoptionRequest")
+  sentBy: User! @relation(name: "UserToAdoptionRequest")
+  accepted: Boolean! @default(value: false)
+  createdAt: DateTime!
+}
+
+type Adoption {
+  id: ID! @unique
+  adoptionRequest: AdoptionRequest!
+  createdAt: DateTime!
+}
+
+type Event {
+  id: ID! @unique
+  createdBy: User! @relation(name: "UserToEvent")
+  title: String!
+  description: String!
+  date: DateTime!
+  comments: [Comment!]!
+  createdAt: DateTime!
+}
+
+type Report {
+  id: ID! @unique
+  author: User! @relation(name: "WrittenReports")
+  responsible: User! @relation(name: "IncomingReports")
+  type: ReportType!
+  title: String!
+  body: String!
+  published: Boolean! @default(value: false)
+  comments: [Comment!]!
+  createdAt: DateTime!
+}
+
+type Comment {
+  id: ID! @unique
+  author: User!
+  text: String!
+  createdAt: DateTime!
+}
