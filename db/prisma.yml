@@ -1,4 +1,2 @@
 endpoint: http://localhost:4466
-datamodel: 
-  - types.prisma
-  - enums.prisma
+datamodel: datamodel.prisma

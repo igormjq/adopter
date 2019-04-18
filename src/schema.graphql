@@ -2,3 +2,7 @@ type Query {
   info: String!
   test: String!
 }
+
+type Mutation {
+  myInfo(name: String!): String!
+}

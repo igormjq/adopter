@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/www/index.js --ext js,graphql --exec babel-node",
-    "get-schema": "graphql get-schema -p adopter"
+    "get-schema": "graphql get-schema -p prisma"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,8 @@
     "babel-preset-env": "^1.7.0",
     "graphql-cli": "^3.0.11",
     "graphql-yoga": "^1.17.4",
-    "prisma-binding": "^2.3.10"
+    "prisma-binding": "^2.3.10",
+    "prisma-cli": "^1.0.9"
   },
   "devDependencies": {
     "nodemon": "^1.18.11"

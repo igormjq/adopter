@@ -1,7 +1,7 @@
 version: '3'
 services:
   prisma:
-    image: prismagraphql/prisma:1.29
+    image: prismagraphql/prisma:1.31
     restart: always
     ports:
     - "4466:4466"
@@ -22,6 +22,9 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
+    # Uncomment the next two lines to connect to your your database from outside the Docker environment, e.g. using a database GUI like Workbench
+    ports:
+    - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: prisma
     volumes:

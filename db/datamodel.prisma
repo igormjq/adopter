@@ -1,5 +1,5 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   email: String! @unique
   password: String!
   name: String!
@@ -11,11 +11,12 @@ type User {
   favoriteAnimals: [Animal!]! @relation(name: "FavoriteAnimals")
   adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
   role: UserRoles!
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Animal {
-  id: ID! @unique
+  id: ID! @id
   owner: User! @relation(name: "OwnerToAnimal")
   name: String!
   type: AnimalType!
@@ -27,35 +28,39 @@ type Animal {
   about: String!
   likedBy: [User!]! @relation(name: "FavoriteAnimals")
   requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type AdoptionRequest {
-  id: ID! @unique
+  id: ID! @id
   animal: Animal! @relation(name: "AnimalToAdoptionRequest")
   sentBy: User! @relation(name: "UserToAdoptionRequest")
   accepted: Boolean! @default(value: false)
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Adoption {
-  id: ID! @unique
+  id: ID! @id
   adoptionRequest: AdoptionRequest!
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Event {
-  id: ID! @unique
+  id: ID! @id
   createdBy: User! @relation(name: "UserToEvent")
   title: String!
   description: String!
   date: DateTime!
   comments: [Comment!]!
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Report {
-  id: ID! @unique
+  id: ID! @id
   author: User! @relation(name: "WrittenReports")
   responsible: User! @relation(name: "IncomingReports")
   type: ReportType!
@@ -63,12 +68,44 @@ type Report {
   body: String!
   published: Boolean! @default(value: false)
   comments: [Comment!]!
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Comment {
-  id: ID! @unique
+  id: ID! @id
   author: User!
   text: String!
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+enum AnimalType { 
+  DOG
+  CAT
+}
+
+enum AnimalGender {
+  MALE
+  FEMALE
+}
+
+enum AnimalSize {
+  EXTRA_SMALL
+  SMALL
+  MEDIUM
+  LARGE
+  EXTRA_LARGE
+}
+
+enum UserRoles {
+  ADMIN
+  PERSON
+  INSTITUTION
+}
+
+enum ReportType {
+  GENERAL
+  ABUSE
+  HELP
 }

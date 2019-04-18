@@ -1,10 +1,11 @@
 # source: http://localhost:4466
-# timestamp: Wed Apr 17 2019 19:54:00 GMT-0300 (GMT-03:00)
+# timestamp: Thu Apr 18 2019 14:30:15 GMT-0300 (GMT-03:00)
 
 type Adoption implements Node {
   id: ID!
   adoptionRequest: AdoptionRequest!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -18,6 +19,7 @@ type AdoptionConnection {
 }
 
 input AdoptionCreateInput {
+  id: ID
   adoptionRequest: AdoptionRequestCreateOneInput!
 }
 
@@ -42,6 +44,7 @@ enum AdoptionOrderByInput {
 type AdoptionPreviousValues {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type AdoptionRequest implements Node {
@@ -50,6 +53,7 @@ type AdoptionRequest implements Node {
   sentBy: User!
   accepted: Boolean!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -63,6 +67,7 @@ type AdoptionRequestConnection {
 }
 
 input AdoptionRequestCreateInput {
+  id: ID
   accepted: Boolean
   animal: AnimalCreateOneWithoutRequestedInInput!
   sentBy: UserCreateOneWithoutAdoptionRequestsInput!
@@ -84,11 +89,13 @@ input AdoptionRequestCreateOneInput {
 }
 
 input AdoptionRequestCreateWithoutAnimalInput {
+  id: ID
   accepted: Boolean
   sentBy: UserCreateOneWithoutAdoptionRequestsInput!
 }
 
 input AdoptionRequestCreateWithoutSentByInput {
+  id: ID
   accepted: Boolean
   animal: AnimalCreateOneWithoutRequestedInInput!
 }
@@ -117,6 +124,7 @@ type AdoptionRequestPreviousValues {
   id: ID!
   accepted: Boolean!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input AdoptionRequestScalarWhereInput {
@@ -194,6 +202,28 @@ input AdoptionRequestScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 type AdoptionRequestSubscriptionPayload {
@@ -401,6 +431,28 @@ input AdoptionRequestWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   animal: AnimalWhereInput
   sentBy: UserWhereInput
 }
@@ -521,6 +573,28 @@ input AdoptionWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   adoptionRequest: AdoptionRequestWhereInput
 }
 
@@ -570,6 +644,7 @@ type Animal implements Node {
   likedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   requestedIn(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -583,6 +658,7 @@ type AnimalConnection {
 }
 
 input AnimalCreateInput {
+  id: ID
   name: String!
   type: AnimalType!
   size: AnimalSize!
@@ -612,6 +688,7 @@ input AnimalCreateOneWithoutRequestedInInput {
 }
 
 input AnimalCreateWithoutLikedByInput {
+  id: ID
   name: String!
   type: AnimalType!
   size: AnimalSize!
@@ -625,6 +702,7 @@ input AnimalCreateWithoutLikedByInput {
 }
 
 input AnimalCreateWithoutOwnerInput {
+  id: ID
   name: String!
   type: AnimalType!
   size: AnimalSize!
@@ -638,6 +716,7 @@ input AnimalCreateWithoutOwnerInput {
 }
 
 input AnimalCreateWithoutRequestedInInput {
+  id: ID
   name: String!
   type: AnimalType!
   size: AnimalSize!
@@ -700,6 +779,7 @@ type AnimalPreviousValues {
   available: Boolean!
   about: String!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input AnimalScalarWhereInput {
@@ -895,6 +975,28 @@ input AnimalScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 enum AnimalSize {
@@ -1278,6 +1380,28 @@ input AnimalWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   owner: UserWhereInput
   likedBy_every: UserWhereInput
   likedBy_some: UserWhereInput
@@ -1301,6 +1425,7 @@ type Comment implements Node {
   author: User!
   text: String!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1314,6 +1439,7 @@ type CommentConnection {
 }
 
 input CommentCreateInput {
+  id: ID
   text: String!
   author: UserCreateOneInput!
 }
@@ -1347,6 +1473,7 @@ type CommentPreviousValues {
   id: ID!
   text: String!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input CommentScalarWhereInput {
@@ -1460,6 +1587,28 @@ input CommentScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 type CommentSubscriptionPayload {
@@ -1656,6 +1805,28 @@ input CommentWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   author: UserWhereInput
 }
 
@@ -1673,6 +1844,7 @@ type Event implements Node {
   date: DateTime!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1686,6 +1858,7 @@ type EventConnection {
 }
 
 input EventCreateInput {
+  id: ID
   title: String!
   description: String!
   date: DateTime!
@@ -1723,6 +1896,7 @@ type EventPreviousValues {
   description: String!
   date: DateTime!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type EventSubscriptionPayload {
@@ -1949,6 +2123,28 @@ input EventWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   createdBy: UserWhereInput
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput
@@ -1973,42 +2169,42 @@ type Mutation {
   createAdoption(data: AdoptionCreateInput!): Adoption!
   createEvent(data: EventCreateInput!): Event!
   createReport(data: ReportCreateInput!): Report!
-  createAdoptionRequest(data: AdoptionRequestCreateInput!): AdoptionRequest!
   createComment(data: CommentCreateInput!): Comment!
+  createAdoptionRequest(data: AdoptionRequestCreateInput!): AdoptionRequest!
   createUser(data: UserCreateInput!): User!
   updateAnimal(data: AnimalUpdateInput!, where: AnimalWhereUniqueInput!): Animal
   updateAdoption(data: AdoptionUpdateInput!, where: AdoptionWhereUniqueInput!): Adoption
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
-  updateAdoptionRequest(data: AdoptionRequestUpdateInput!, where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateAdoptionRequest(data: AdoptionRequestUpdateInput!, where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteAnimal(where: AnimalWhereUniqueInput!): Animal
   deleteAdoption(where: AdoptionWhereUniqueInput!): Adoption
   deleteEvent(where: EventWhereUniqueInput!): Event
   deleteReport(where: ReportWhereUniqueInput!): Report
-  deleteAdoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteAdoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   deleteUser(where: UserWhereUniqueInput!): User
   upsertAnimal(where: AnimalWhereUniqueInput!, create: AnimalCreateInput!, update: AnimalUpdateInput!): Animal!
   upsertAdoption(where: AdoptionWhereUniqueInput!, create: AdoptionCreateInput!, update: AdoptionUpdateInput!): Adoption!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
   upsertReport(where: ReportWhereUniqueInput!, create: ReportCreateInput!, update: ReportUpdateInput!): Report!
-  upsertAdoptionRequest(where: AdoptionRequestWhereUniqueInput!, create: AdoptionRequestCreateInput!, update: AdoptionRequestUpdateInput!): AdoptionRequest!
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  upsertAdoptionRequest(where: AdoptionRequestWhereUniqueInput!, create: AdoptionRequestCreateInput!, update: AdoptionRequestUpdateInput!): AdoptionRequest!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyAnimals(data: AnimalUpdateManyMutationInput!, where: AnimalWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
   updateManyReports(data: ReportUpdateManyMutationInput!, where: ReportWhereInput): BatchPayload!
-  updateManyAdoptionRequests(data: AdoptionRequestUpdateManyMutationInput!, where: AdoptionRequestWhereInput): BatchPayload!
   updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  updateManyAdoptionRequests(data: AdoptionRequestUpdateManyMutationInput!, where: AdoptionRequestWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   deleteManyAnimals(where: AnimalWhereInput): BatchPayload!
   deleteManyAdoptions(where: AdoptionWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
   deleteManyReports(where: ReportWhereInput): BatchPayload!
-  deleteManyAdoptionRequests(where: AdoptionRequestWhereInput): BatchPayload!
   deleteManyComments(where: CommentWhereInput): BatchPayload!
+  deleteManyAdoptionRequests(where: AdoptionRequestWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -2049,22 +2245,22 @@ type Query {
   adoptions(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adoption]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
   reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
-  adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest]!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   animal(where: AnimalWhereUniqueInput!): Animal
   adoption(where: AdoptionWhereUniqueInput!): Adoption
   event(where: EventWhereUniqueInput!): Event
   report(where: ReportWhereUniqueInput!): Report
-  adoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   comment(where: CommentWhereUniqueInput!): Comment
+  adoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   user(where: UserWhereUniqueInput!): User
   animalsConnection(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnimalConnection!
   adoptionsConnection(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
-  adoptionRequestsConnection(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionRequestConnection!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  adoptionRequestsConnection(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionRequestConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
@@ -2084,6 +2280,7 @@ type Report implements Node {
   published: Boolean!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -2097,6 +2294,7 @@ type ReportConnection {
 }
 
 input ReportCreateInput {
+  id: ID
   type: ReportType!
   title: String!
   body: String!
@@ -2139,6 +2337,7 @@ type ReportPreviousValues {
   body: String!
   published: Boolean!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ReportSubscriptionPayload {
@@ -2366,6 +2565,28 @@ input ReportWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   author: UserWhereInput
   responsible: UserWhereInput
   comments_every: CommentWhereInput
@@ -2382,8 +2603,8 @@ type Subscription {
   adoption(where: AdoptionSubscriptionWhereInput): AdoptionSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
-  adoptionRequest(where: AdoptionRequestSubscriptionWhereInput): AdoptionRequestSubscriptionPayload
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  adoptionRequest(where: AdoptionRequestSubscriptionWhereInput): AdoptionRequestSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -2401,6 +2622,7 @@ type User implements Node {
   adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   role: UserRoles!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -2414,6 +2636,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   password: String!
   name: String!
@@ -2448,6 +2671,7 @@ input UserCreateOneWithoutAnimalsInput {
 }
 
 input UserCreateWithoutAdoptionRequestsInput {
+  id: ID
   email: String!
   password: String!
   name: String!
@@ -2461,6 +2685,7 @@ input UserCreateWithoutAdoptionRequestsInput {
 }
 
 input UserCreateWithoutAnimalsInput {
+  id: ID
   email: String!
   password: String!
   name: String!
@@ -2474,6 +2699,7 @@ input UserCreateWithoutAnimalsInput {
 }
 
 input UserCreateWithoutFavoriteAnimalsInput {
+  id: ID
   email: String!
   password: String!
   name: String!
@@ -2531,6 +2757,7 @@ type UserPreviousValues {
   address: String!
   role: UserRoles!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 enum UserRoles {
@@ -2900,6 +3127,28 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 type UserSubscriptionPayload {
@@ -3453,6 +3702,28 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   animals_every: AnimalWhereInput
   animals_some: AnimalWhereInput
   animals_none: AnimalWhereInput
