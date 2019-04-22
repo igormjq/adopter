@@ -47,6 +47,11 @@ type AdoptionRequest {
   accepted: Boolean!
 }
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
