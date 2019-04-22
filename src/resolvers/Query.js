@@ -1,7 +1,7 @@
+import UserQuery from './user/UserQuery';
+
 const Query = {
-  async users(parent, args, { prisma }, info) {
-    return await prisma.query.users(info);
-  }
+  ...UserQuery
 };
 
 export { Query as default };
