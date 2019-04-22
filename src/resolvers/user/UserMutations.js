@@ -19,5 +19,8 @@ export default {
       where: { id },
       data
     }, info);
+  },
+  async deleteUser(parent, { id }, { prisma }, info) {
+    return prisma.mutation.deleteUser({ where: { id }}, info);
   }
 }
