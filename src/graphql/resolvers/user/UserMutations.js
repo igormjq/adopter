@@ -1,9 +1,8 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export default {
   async createUser (parent, { data }, { prisma }, info) {
-    if(!password) throw new Error('Senha é obrigatório');
-
     const password = await bcrypt.hash(data.password, 10);
     const user = await prisma.mutation.createUser({
       data: {
@@ -11,8 +10,13 @@ export default {
         password
       }
     });
+    
+    delete user.password;
 
-    return user;
+    return {
+      token: jwt.sign({ id: user.id }, 'secret'),
+      user
+    };
   },
   async updateUser(parent, { id, data }, { prisma }, info) {
     return prisma.mutation.updateUser({

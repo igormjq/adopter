@@ -5,7 +5,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(data: CreateUserInput): User!
+  createUser(data: CreateUserInput): AuthPayload!
   updateUser(id: ID!, data: UpdateUserInput): User!
   deleteUser(id: ID!): User!
 }
@@ -13,7 +13,7 @@ type Mutation {
 type User {
   id: ID!
   email: String!
-  password: String!
+  password: String
   name: String!
   cpf: String
   cnpj: String
