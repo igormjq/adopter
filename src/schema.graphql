@@ -5,6 +5,7 @@ type Query {
 
 type Mutation {
   createUser(data: CreateUserInput): User!
+  updateUser(id: ID!, data: UpdateUserInput): User!
 }
 
 type User {
@@ -55,9 +56,15 @@ input CreateUserInput {
   role: UserRoles!
 }
 
-# input CreateAnimalInput {
-  
-# }
+input UpdateUserInput {
+  email: String
+  password: String
+  name: String
+  cpf: String
+  cnpj: String
+  phone: String
+  address: String
+}
 
 enum UserRoles {
   ADMIN
