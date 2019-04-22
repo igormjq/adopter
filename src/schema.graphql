@@ -4,5 +4,81 @@ type Query {
 }
 
 type Mutation {
-  myInfo(name: String!): String!
+  createUser(data: CreateUserInput): String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  name: String!
+  cpf: String
+  cnpj: String
+  phone: String!
+  address: String!
+  animals: [Animal!]!
+  favoriteAnimals: [Animal!]!
+  adoptionRequests: [AdoptionRequest!]!
+  role: UserRoles!
+}
+
+type Animal {
+  id: ID!
+  owner: User!
+  name: String!
+  type: AnimalType!
+  size: AnimalSize!
+  gender: AnimalGender
+  castrated: Boolean
+  vaccinated: Boolean
+  available: Boolean
+  about: String!
+  likedBy: [User!]!
+  requestedIn: [AdoptionRequest!]!
+}
+
+type AdoptionRequest {
+  id: ID!
+  animal: Animal!
+  sentBy: User!
+  accepted: Boolean!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  name: String!
+  cpf: String
+  cnpj: String
+  phone: String
+  address: String
+  role: UserRoles!
+}
+
+input CreateAnimalInput {
+  
+}
+
+enum UserRoles {
+  ADMIN,
+  INSTITUTION,
+  PERSON
+}
+
+enum AnimalType { 
+  DOG
+  CAT
+}
+
+enum AnimalGender {
+  MALE
+  FEMALE
+}
+
+enum AnimalSize {
+  EXTRA_SMALL
+  SMALL
+  MEDIUM
+  LARGE
+  EXTRA_LARGE
 }
