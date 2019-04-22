@@ -9,7 +9,7 @@ const server = new GraphQLServer({
   context({ request }) {
     return {
       prisma,
-      user: request.user
+      request
     }
   }
 });
