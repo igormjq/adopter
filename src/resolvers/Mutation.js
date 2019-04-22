@@ -1,6 +1,6 @@
 const Mutation = {
-  createUser(parent, { data }, ctx, info) {
-    console.log('i dati', data);
+  createUser(parent, { data }, { prisma }, info) {
+    console.log('has prisma?', prisma);
     return 'Oi'
   }
 };

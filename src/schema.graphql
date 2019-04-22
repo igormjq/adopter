@@ -55,13 +55,13 @@ input CreateUserInput {
   role: UserRoles!
 }
 
-input CreateAnimalInput {
+# input CreateAnimalInput {
   
-}
+# }
 
 enum UserRoles {
-  ADMIN,
-  INSTITUTION,
+  ADMIN
+  INSTITUTION
   PERSON
 }
 
