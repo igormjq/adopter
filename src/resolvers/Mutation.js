@@ -1,7 +1,10 @@
 const Mutation = {
-  createUser(parent, { data }, { prisma }, info) {
-    console.log('has prisma?', prisma);
-    return 'Oi'
+  async createUser (parent, { data }, { prisma }, info) {
+    const user = await prisma.mutation.createUser({ data });
+
+    console.log(user);
+
+    return user;
   }
 };
 
