@@ -1,3 +1,7 @@
+directive @hasRole(
+  role: String
+) on OBJECT | FIELD_DEFINITION
+
 type Query {
   users: [User!]!
   user(id: ID!): User!
