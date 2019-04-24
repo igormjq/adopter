@@ -27,7 +27,20 @@ type User {
   animals: [Animal!]!
   favoriteAnimals: [Animal!]!
   adoptionRequests: [AdoptionRequest!]!
-  role: UserRoles!
+  role: Role!
+}
+
+type Role {
+  id: ID!
+  name: String!
+  displayName: String!
+  permissions: [RolePermissions!]!
+}
+
+type RolePermissions {
+  id: ID!
+  name: String!
+  displayName: String!
 }
 
 type Animal {

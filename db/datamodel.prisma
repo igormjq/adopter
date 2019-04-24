@@ -10,7 +10,24 @@ type User {
   animals: [Animal!]! @relation(name: "OwnerToAnimal", onDelete: CASCADE)
   favoriteAnimals: [Animal!]! @relation(name: "FavoriteAnimals")
   adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
-  role: UserRoles!
+  role: Role!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Role {
+  id: ID! @id
+  name: String! @unique
+  displayName: String!
+  permissions: [Permissions]
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Permissions {
+  id: ID! @id
+  name: String! @unique
+  displayName: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
