@@ -1,6 +1,8 @@
-directive @hasRole(
-  role: String
+directive @requires(
+  permission: String
 ) on OBJECT | FIELD_DEFINITION
+
+directive @auth on FIELD_DEFINITION
 
 type Query {
   users: [User!]!

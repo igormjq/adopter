@@ -13,7 +13,7 @@ export default {
 
     if(!passwordMatch) throw new Error('Senha incorreta');
 
-    const { password, ...payloadUser } = user
+    const { password, ...payloadUser } = user;
 
     return {
       token: jwt.sign({ id: user.id }, 'secret'),
