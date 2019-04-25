@@ -2,18 +2,18 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export default {
-  async login(parent, { data: { email, password } }, { prisma, request }, info) {
+  async login(parent, { data }, { prisma, request }, info) {
     let user, passwordMatch;
     
-    user = await prisma.query.user({ where: { email }});
+    user = await prisma.query.user({ where: { email: data.email }});
 
     if(!user) throw new Error('Usuário não encontrado');
 
-    passwordMatch = await bcrypt.compare(password, user.password);
+    passwordMatch = await bcrypt.compare(data.password, user.password);
 
     if(!passwordMatch) throw new Error('Senha incorreta');
 
-    const { ...payloadUser, password } = user
+    const { password, ...payloadUser } = user
 
     return {
       token: jwt.sign({ id: user.id }, 'secret'),

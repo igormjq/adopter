@@ -19,7 +19,7 @@ export default class AuthDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
     const { resolve = defaultFieldResolver } = field;
     const { role } = this.args;
-    field.resolve = async function (parent, args, { user }) {
+    field.resolve = async function (parent, args, { request: { user } }) {
       if (user) {
         const haveRole = user.roles.find(userRole => userRole.name === role);
 
