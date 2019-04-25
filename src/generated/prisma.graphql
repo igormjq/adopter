@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Apr 18 2019 14:30:15 GMT-0300 (GMT-03:00)
+# timestamp: Thu Apr 25 2019 10:09:28 GMT-0300 (GMT-03:00)
 
 type Adoption implements Node {
   id: ID!
@@ -622,7 +622,15 @@ type AggregateEvent {
   count: Int!
 }
 
+type AggregatePermissions {
+  count: Int!
+}
+
 type AggregateReport {
+  count: Int!
+}
+
+type AggregateRole {
   count: Int!
 }
 
@@ -637,8 +645,8 @@ type Animal implements Node {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean!
   about: String!
   likedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -663,8 +671,8 @@ input AnimalCreateInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean
   about: String!
   owner: UserCreateOneWithoutAnimalsInput!
@@ -693,8 +701,8 @@ input AnimalCreateWithoutLikedByInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean
   about: String!
   owner: UserCreateOneWithoutAnimalsInput!
@@ -707,8 +715,8 @@ input AnimalCreateWithoutOwnerInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean
   about: String!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
@@ -721,8 +729,8 @@ input AnimalCreateWithoutRequestedInInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean
   about: String!
   owner: UserCreateOneWithoutAnimalsInput!
@@ -774,8 +782,8 @@ type AnimalPreviousValues {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean!
   about: String!
   createdAt: DateTime!
@@ -2169,43 +2177,55 @@ type Mutation {
   createAdoption(data: AdoptionCreateInput!): Adoption!
   createEvent(data: EventCreateInput!): Event!
   createReport(data: ReportCreateInput!): Report!
+  createPermissions(data: PermissionsCreateInput!): Permissions!
   createComment(data: CommentCreateInput!): Comment!
   createAdoptionRequest(data: AdoptionRequestCreateInput!): AdoptionRequest!
   createUser(data: UserCreateInput!): User!
+  createRole(data: RoleCreateInput!): Role!
   updateAnimal(data: AnimalUpdateInput!, where: AnimalWhereUniqueInput!): Animal
   updateAdoption(data: AdoptionUpdateInput!, where: AdoptionWhereUniqueInput!): Adoption
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
   updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
+  updatePermissions(data: PermissionsUpdateInput!, where: PermissionsWhereUniqueInput!): Permissions
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
   updateAdoptionRequest(data: AdoptionRequestUpdateInput!, where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
   deleteAnimal(where: AnimalWhereUniqueInput!): Animal
   deleteAdoption(where: AdoptionWhereUniqueInput!): Adoption
   deleteEvent(where: EventWhereUniqueInput!): Event
   deleteReport(where: ReportWhereUniqueInput!): Report
+  deletePermissions(where: PermissionsWhereUniqueInput!): Permissions
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteAdoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteRole(where: RoleWhereUniqueInput!): Role
   upsertAnimal(where: AnimalWhereUniqueInput!, create: AnimalCreateInput!, update: AnimalUpdateInput!): Animal!
   upsertAdoption(where: AdoptionWhereUniqueInput!, create: AdoptionCreateInput!, update: AdoptionUpdateInput!): Adoption!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
   upsertReport(where: ReportWhereUniqueInput!, create: ReportCreateInput!, update: ReportUpdateInput!): Report!
+  upsertPermissions(where: PermissionsWhereUniqueInput!, create: PermissionsCreateInput!, update: PermissionsUpdateInput!): Permissions!
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   upsertAdoptionRequest(where: AdoptionRequestWhereUniqueInput!, create: AdoptionRequestCreateInput!, update: AdoptionRequestUpdateInput!): AdoptionRequest!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
   updateManyAnimals(data: AnimalUpdateManyMutationInput!, where: AnimalWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
   updateManyReports(data: ReportUpdateManyMutationInput!, where: ReportWhereInput): BatchPayload!
+  updateManyPermissionses(data: PermissionsUpdateManyMutationInput!, where: PermissionsWhereInput): BatchPayload!
   updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
   updateManyAdoptionRequests(data: AdoptionRequestUpdateManyMutationInput!, where: AdoptionRequestWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyRoles(data: RoleUpdateManyMutationInput!, where: RoleWhereInput): BatchPayload!
   deleteManyAnimals(where: AnimalWhereInput): BatchPayload!
   deleteManyAdoptions(where: AdoptionWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
   deleteManyReports(where: ReportWhereInput): BatchPayload!
+  deleteManyPermissionses(where: PermissionsWhereInput): BatchPayload!
   deleteManyComments(where: CommentWhereInput): BatchPayload!
   deleteManyAdoptionRequests(where: AdoptionRequestWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyRoles(where: RoleWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -2236,6 +2256,505 @@ type PageInfo {
   endCursor: String
 }
 
+type Permissions implements Node {
+  id: ID!
+  name: String!
+  displayName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type PermissionsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PermissionsEdge]!
+  aggregate: AggregatePermissions!
+}
+
+input PermissionsCreateInput {
+  id: ID
+  name: String!
+  displayName: String!
+}
+
+input PermissionsCreateManyInput {
+  create: [PermissionsCreateInput!]
+  connect: [PermissionsWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type PermissionsEdge {
+  """The item at the end of the edge."""
+  node: Permissions!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum PermissionsOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  displayName_ASC
+  displayName_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type PermissionsPreviousValues {
+  id: ID!
+  name: String!
+  displayName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input PermissionsScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PermissionsScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PermissionsScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PermissionsScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  displayName: String
+
+  """All values that are not equal to given value."""
+  displayName_not: String
+
+  """All values that are contained in given list."""
+  displayName_in: [String!]
+
+  """All values that are not contained in given list."""
+  displayName_not_in: [String!]
+
+  """All values less than the given value."""
+  displayName_lt: String
+
+  """All values less than or equal the given value."""
+  displayName_lte: String
+
+  """All values greater than the given value."""
+  displayName_gt: String
+
+  """All values greater than or equal the given value."""
+  displayName_gte: String
+
+  """All values containing the given string."""
+  displayName_contains: String
+
+  """All values not containing the given string."""
+  displayName_not_contains: String
+
+  """All values starting with the given string."""
+  displayName_starts_with: String
+
+  """All values not starting with the given string."""
+  displayName_not_starts_with: String
+
+  """All values ending with the given string."""
+  displayName_ends_with: String
+
+  """All values not ending with the given string."""
+  displayName_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+type PermissionsSubscriptionPayload {
+  mutation: MutationType!
+  node: Permissions
+  updatedFields: [String!]
+  previousValues: PermissionsPreviousValues
+}
+
+input PermissionsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PermissionsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PermissionsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PermissionsSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PermissionsWhereInput
+}
+
+input PermissionsUpdateDataInput {
+  name: String
+  displayName: String
+}
+
+input PermissionsUpdateInput {
+  name: String
+  displayName: String
+}
+
+input PermissionsUpdateManyDataInput {
+  name: String
+  displayName: String
+}
+
+input PermissionsUpdateManyInput {
+  create: [PermissionsCreateInput!]
+  connect: [PermissionsWhereUniqueInput!]
+  set: [PermissionsWhereUniqueInput!]
+  disconnect: [PermissionsWhereUniqueInput!]
+  delete: [PermissionsWhereUniqueInput!]
+  update: [PermissionsUpdateWithWhereUniqueNestedInput!]
+  updateMany: [PermissionsUpdateManyWithWhereNestedInput!]
+  deleteMany: [PermissionsScalarWhereInput!]
+  upsert: [PermissionsUpsertWithWhereUniqueNestedInput!]
+}
+
+input PermissionsUpdateManyMutationInput {
+  name: String
+  displayName: String
+}
+
+input PermissionsUpdateManyWithWhereNestedInput {
+  where: PermissionsScalarWhereInput!
+  data: PermissionsUpdateManyDataInput!
+}
+
+input PermissionsUpdateWithWhereUniqueNestedInput {
+  where: PermissionsWhereUniqueInput!
+  data: PermissionsUpdateDataInput!
+}
+
+input PermissionsUpsertWithWhereUniqueNestedInput {
+  where: PermissionsWhereUniqueInput!
+  update: PermissionsUpdateDataInput!
+  create: PermissionsCreateInput!
+}
+
+input PermissionsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PermissionsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PermissionsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PermissionsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  displayName: String
+
+  """All values that are not equal to given value."""
+  displayName_not: String
+
+  """All values that are contained in given list."""
+  displayName_in: [String!]
+
+  """All values that are not contained in given list."""
+  displayName_not_in: [String!]
+
+  """All values less than the given value."""
+  displayName_lt: String
+
+  """All values less than or equal the given value."""
+  displayName_lte: String
+
+  """All values greater than the given value."""
+  displayName_gt: String
+
+  """All values greater than or equal the given value."""
+  displayName_gte: String
+
+  """All values containing the given string."""
+  displayName_contains: String
+
+  """All values not containing the given string."""
+  displayName_not_contains: String
+
+  """All values starting with the given string."""
+  displayName_starts_with: String
+
+  """All values not starting with the given string."""
+  displayName_not_starts_with: String
+
+  """All values ending with the given string."""
+  displayName_ends_with: String
+
+  """All values not ending with the given string."""
+  displayName_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+input PermissionsWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 enum PrismaDatabase {
   default
 }
@@ -2245,23 +2764,29 @@ type Query {
   adoptions(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adoption]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
   reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
+  permissionses(where: PermissionsWhereInput, orderBy: PermissionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Permissions]!
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
   animal(where: AnimalWhereUniqueInput!): Animal
   adoption(where: AdoptionWhereUniqueInput!): Adoption
   event(where: EventWhereUniqueInput!): Event
   report(where: ReportWhereUniqueInput!): Report
+  permissions(where: PermissionsWhereUniqueInput!): Permissions
   comment(where: CommentWhereUniqueInput!): Comment
   adoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   user(where: UserWhereUniqueInput!): User
+  role(where: RoleWhereUniqueInput!): Role
   animalsConnection(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnimalConnection!
   adoptionsConnection(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
+  permissionsesConnection(where: PermissionsWhereInput, orderBy: PermissionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PermissionsConnection!
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   adoptionRequestsConnection(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionRequestConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2598,14 +3123,326 @@ input ReportWhereUniqueInput {
   id: ID
 }
 
+type Role implements Node {
+  id: ID!
+  name: String!
+  displayName: String!
+  permissions(where: PermissionsWhereInput, orderBy: PermissionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Permissions!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type RoleConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [RoleEdge]!
+  aggregate: AggregateRole!
+}
+
+input RoleCreateInput {
+  id: ID
+  name: String!
+  displayName: String!
+  permissions: PermissionsCreateManyInput
+}
+
+input RoleCreateOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type RoleEdge {
+  """The item at the end of the edge."""
+  node: Role!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum RoleOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  displayName_ASC
+  displayName_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type RolePreviousValues {
+  id: ID!
+  name: String!
+  displayName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type RoleSubscriptionPayload {
+  mutation: MutationType!
+  node: Role
+  updatedFields: [String!]
+  previousValues: RolePreviousValues
+}
+
+input RoleSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RoleSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RoleSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RoleSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: RoleWhereInput
+}
+
+input RoleUpdateDataInput {
+  name: String
+  displayName: String
+  permissions: PermissionsUpdateManyInput
+}
+
+input RoleUpdateInput {
+  name: String
+  displayName: String
+  permissions: PermissionsUpdateManyInput
+}
+
+input RoleUpdateManyMutationInput {
+  name: String
+  displayName: String
+}
+
+input RoleUpdateOneRequiredInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  update: RoleUpdateDataInput
+  upsert: RoleUpsertNestedInput
+}
+
+input RoleUpsertNestedInput {
+  update: RoleUpdateDataInput!
+  create: RoleCreateInput!
+}
+
+input RoleWhereInput {
+  """Logical AND on all given filters."""
+  AND: [RoleWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [RoleWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [RoleWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  displayName: String
+
+  """All values that are not equal to given value."""
+  displayName_not: String
+
+  """All values that are contained in given list."""
+  displayName_in: [String!]
+
+  """All values that are not contained in given list."""
+  displayName_not_in: [String!]
+
+  """All values less than the given value."""
+  displayName_lt: String
+
+  """All values less than or equal the given value."""
+  displayName_lte: String
+
+  """All values greater than the given value."""
+  displayName_gt: String
+
+  """All values greater than or equal the given value."""
+  displayName_gte: String
+
+  """All values containing the given string."""
+  displayName_contains: String
+
+  """All values not containing the given string."""
+  displayName_not_contains: String
+
+  """All values starting with the given string."""
+  displayName_starts_with: String
+
+  """All values not starting with the given string."""
+  displayName_not_starts_with: String
+
+  """All values ending with the given string."""
+  displayName_ends_with: String
+
+  """All values not ending with the given string."""
+  displayName_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  permissions_every: PermissionsWhereInput
+  permissions_some: PermissionsWhereInput
+  permissions_none: PermissionsWhereInput
+}
+
+input RoleWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 type Subscription {
   animal(where: AnimalSubscriptionWhereInput): AnimalSubscriptionPayload
   adoption(where: AdoptionSubscriptionWhereInput): AdoptionSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
+  permissions(where: PermissionsSubscriptionWhereInput): PermissionsSubscriptionPayload
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   adoptionRequest(where: AdoptionRequestSubscriptionWhereInput): AdoptionRequestSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
 }
 
 type User implements Node {
@@ -2620,7 +3457,7 @@ type User implements Node {
   animals(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Animal!]
   favoriteAnimals(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Animal!]
   adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
-  role: UserRoles!
+  role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2644,10 +3481,10 @@ input UserCreateInput {
   cnpj: String
   phone: String!
   address: String!
-  role: UserRoles!
   animals: AnimalCreateManyWithoutOwnerInput
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
+  role: RoleCreateOneInput!
 }
 
 input UserCreateManyWithoutFavoriteAnimalsInput {
@@ -2679,9 +3516,9 @@ input UserCreateWithoutAdoptionRequestsInput {
   cnpj: String
   phone: String!
   address: String!
-  role: UserRoles!
   animals: AnimalCreateManyWithoutOwnerInput
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
+  role: RoleCreateOneInput!
 }
 
 input UserCreateWithoutAnimalsInput {
@@ -2693,9 +3530,9 @@ input UserCreateWithoutAnimalsInput {
   cnpj: String
   phone: String!
   address: String!
-  role: UserRoles!
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
+  role: RoleCreateOneInput!
 }
 
 input UserCreateWithoutFavoriteAnimalsInput {
@@ -2707,9 +3544,9 @@ input UserCreateWithoutFavoriteAnimalsInput {
   cnpj: String
   phone: String!
   address: String!
-  role: UserRoles!
   animals: AnimalCreateManyWithoutOwnerInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
+  role: RoleCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -2738,8 +3575,6 @@ enum UserOrderByInput {
   phone_DESC
   address_ASC
   address_DESC
-  role_ASC
-  role_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -2755,15 +3590,8 @@ type UserPreviousValues {
   cnpj: String
   phone: String!
   address: String!
-  role: UserRoles!
   createdAt: DateTime!
   updatedAt: DateTime!
-}
-
-enum UserRoles {
-  ADMIN
-  PERSON
-  INSTITUTION
 }
 
 input UserScalarWhereInput {
@@ -3095,16 +3923,6 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   address_not_ends_with: String
-  role: UserRoles
-
-  """All values that are not equal to given value."""
-  role_not: UserRoles
-
-  """All values that are contained in given list."""
-  role_in: [UserRoles!]
-
-  """All values that are not contained in given list."""
-  role_not_in: [UserRoles!]
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3196,10 +4014,10 @@ input UserUpdateDataInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
+  role: RoleUpdateOneRequiredInput
 }
 
 input UserUpdateInput {
@@ -3210,10 +4028,10 @@ input UserUpdateInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
+  role: RoleUpdateOneRequiredInput
 }
 
 input UserUpdateManyDataInput {
@@ -3224,7 +4042,6 @@ input UserUpdateManyDataInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
 }
 
 input UserUpdateManyMutationInput {
@@ -3235,7 +4052,6 @@ input UserUpdateManyMutationInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
 }
 
 input UserUpdateManyWithoutFavoriteAnimalsInput {
@@ -3284,9 +4100,9 @@ input UserUpdateWithoutAdoptionRequestsDataInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
+  role: RoleUpdateOneRequiredInput
 }
 
 input UserUpdateWithoutAnimalsDataInput {
@@ -3297,9 +4113,9 @@ input UserUpdateWithoutAnimalsDataInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
+  role: RoleUpdateOneRequiredInput
 }
 
 input UserUpdateWithoutFavoriteAnimalsDataInput {
@@ -3310,9 +4126,9 @@ input UserUpdateWithoutFavoriteAnimalsDataInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles
   animals: AnimalUpdateManyWithoutOwnerInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
+  role: RoleUpdateOneRequiredInput
 }
 
 input UserUpdateWithWhereUniqueWithoutFavoriteAnimalsInput {
@@ -3670,16 +4486,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   address_not_ends_with: String
-  role: UserRoles
-
-  """All values that are not equal to given value."""
-  role_not: UserRoles
-
-  """All values that are contained in given list."""
-  role_in: [UserRoles!]
-
-  """All values that are not contained in given list."""
-  role_not_in: [UserRoles!]
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3733,6 +4539,7 @@ input UserWhereInput {
   adoptionRequests_every: AdoptionRequestWhereInput
   adoptionRequests_some: AdoptionRequestWhereInput
   adoptionRequests_none: AdoptionRequestWhereInput
+  role: RoleWhereInput
 }
 
 input UserWhereUniqueInput {

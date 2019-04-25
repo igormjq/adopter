@@ -24,11 +24,14 @@ export default {
     const user = await prisma.mutation.createUser({
       data: {
         ...data,
-        password
+        password,
+        role: {
+          connect: {
+            id: data.role
+          }
+        }
       }
     });
-    
-    delete user.password;
 
     return {
       token: jwt.sign({ id: user.id }, 'secret'),

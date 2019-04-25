@@ -6,6 +6,7 @@ type Query {
   users: [User!]!
   user(id: ID!): User!
   animals: [Animal!]!
+  roles: [Role!]!
 }
 
 type Mutation {
@@ -27,17 +28,17 @@ type User {
   animals: [Animal!]!
   favoriteAnimals: [Animal!]!
   adoptionRequests: [AdoptionRequest!]!
-  role: Role!
+  role: Role
 }
 
 type Role {
   id: ID!
   name: String!
   displayName: String!
-  permissions: [RolePermissions!]!
+  permissions: [Permissions!]!
 }
 
-type RolePermissions {
+type Permissions {
   id: ID!
   name: String!
   displayName: String!
@@ -78,7 +79,7 @@ input CreateUserInput {
   cnpj: String
   phone: String
   address: String
-  role: UserRoles!
+  role: ID!
 }
 
 input UpdateUserInput {
@@ -94,12 +95,6 @@ input UpdateUserInput {
 input LoginInput {
   email: String!
   password: String!
-}
-
-enum UserRoles {
-  ADMIN
-  INSTITUTION
-  PERSON
 }
 
 enum AnimalType { 
