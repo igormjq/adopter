@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 
 export default {
   async login(parent, { data: { email, password } }, { prisma, request }, info) {
@@ -14,8 +15,8 @@ export default {
     if(!passwordMatch) throw new Error('Senha incorreta');
 
     return {
-      user,
-      token: jwt.sign({ id: user.id }, 'secret')
+      token: jwt.sign({ id: user.id }, 'secret'),
+      user: _.omit(user, 'password'),
     };
 
   },
