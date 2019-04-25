@@ -8,7 +8,7 @@ type User {
   phone: String!
   address: String!
   animals: [Animal!]! @relation(name: "OwnerToAnimal", onDelete: CASCADE)
-  favoriteAnimals: [Animal!]! @relation(name: "FavoriteAnimals")
+  favoriteAnimals: [Animal!]! @relation(name: "UserToFavoriteAnimals")
   adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
   role: Role!
   createdAt: DateTime! @createdAt
@@ -39,11 +39,11 @@ type Animal {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
-  castrated: Boolean!
-  vaccinated: Boolean!
+  castrated: Boolean
+  vaccinated: Boolean
   available: Boolean! @default(value: true)
   about: String!
-  likedBy: [User!]! @relation(name: "FavoriteAnimals")
+  likedBy: [User!]! @relation(name: "UserToFavoriteAnimals")
   requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
