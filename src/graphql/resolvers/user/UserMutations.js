@@ -14,16 +14,15 @@ export default {
     if(!passwordMatch) throw new Error('Senha incorreta');
 
     const { password, ...payloadUser } = user;
-
+    console.log(process.env.JWT_SECRET);
     return {
-      token: jwt.sign({ id: user.id }, 'secret'),
+      token: jwt.sign({ id: user.id }, process.env.JWT_SECRET),
       user: payloadUser
     };
 
   },
   async createUser (parent, { data }, { prisma }, info) {
     const password = await bcrypt.hash(data.password, 10);
-    console.log(data.role)
     const user = await prisma.mutation.createUser({
       data: {
         ...data,
@@ -37,7 +36,7 @@ export default {
     }, `{ id name role { name displayName permissions { name displayName }} }`);
 
     return {
-      token: jwt.sign({ id: user.id }, 'secret'),
+      token: jwt.sign({ id: user.id }, process.env.JWT_SECRET),
       user
     };
   },
