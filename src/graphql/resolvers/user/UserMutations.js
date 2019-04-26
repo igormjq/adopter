@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export default {
-  async login(parent, { data }, { prisma, request }, info) {
+  async login(parent, { data }, { prisma }, info) {
     let user, passwordMatch;
     
     user = await prisma.query.user({ where: { email: data.email }});
@@ -23,6 +23,7 @@ export default {
   },
   async createUser (parent, { data }, { prisma }, info) {
     const password = await bcrypt.hash(data.password, 10);
+    console.log(data.role)
     const user = await prisma.mutation.createUser({
       data: {
         ...data,
@@ -32,8 +33,8 @@ export default {
             id: data.role
           }
         }
-      }
-    });
+      },
+    }, `{ id name role { name displayName permissions { name displayName }} }`);
 
     return {
       token: jwt.sign({ id: user.id }, 'secret'),
