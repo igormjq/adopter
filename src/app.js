@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import resolvers from './graphql/resolvers';
 import prisma from './prisma';
 import HasRoleDirective from './graphql/directives/RequiresDirective';
+import AuthDirective from './graphql/directives/AuthDirective';
 
 const server = new GraphQLServer({
   typeDefs: './src/graphql/schema.graphql',
@@ -15,6 +16,7 @@ const server = new GraphQLServer({
   },
   schemaDirectives: {
     requires: HasRoleDirective,
+    auth: AuthDirective
   }
 });
 

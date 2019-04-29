@@ -14,8 +14,8 @@ type Query {
 type Mutation {
   login(data: LoginInput): AuthPayload!
   createUser(data: CreateUserInput): AuthPayload!
-  updateUser(id: ID!, data: UpdateUserInput): User!
-  deleteUser(id: ID!): User!@requires(permission:"create_animal")
+  updateUser(data: UpdateUserInput): User! @auth
+  deleteUser: User! @auth
 }
 
 type User {

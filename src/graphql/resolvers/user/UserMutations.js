@@ -14,7 +14,7 @@ export default {
     if(!passwordMatch) throw new Error('Senha incorreta');
 
     const { password, ...payloadUser } = user;
-    console.log(process.env.JWT_SECRET);
+
     return {
       token: jwt.sign({ id: user.id }, process.env.JWT_SECRET),
       user: payloadUser
@@ -40,13 +40,14 @@ export default {
       user
     };
   },
-  async updateUser(parent, { id, data }, { prisma }, info) {
+  async updateUser(parent, { data }, { prisma, request }, info) {
+
     return prisma.mutation.updateUser({
-      where: { id },
+      where: { id: request.user.id },
       data
     }, info);
   },
-  async deleteUser(parent, { id }, { prisma }, info) {
-    return prisma.mutation.deleteUser({ where: { id }}, info);
+  async deleteUser(parent, args, { prisma, request }, info) {
+    return await prisma.mutation.deleteUser({ where: { id: request.user.id }}, info);
   }
 }
