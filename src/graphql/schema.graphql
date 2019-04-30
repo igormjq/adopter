@@ -1,5 +1,5 @@
-directive @requires(
-  permission: String
+directive @hasRole(
+  role: String
 ) on OBJECT | FIELD_DEFINITION
 
 directive @auth on FIELD_DEFINITION
@@ -16,11 +16,10 @@ type Mutation {
   createUser(data: CreateUserInput!): AuthPayload!
   updateUser(data: UpdateUserInput!): User! @auth
   deleteUser: User! @auth
-  createRole(data: CreateRoleInput!): Role!
+  createRole(data: CreateRoleInput!): Role! @hasRole(role: "admin")
 }
 
 # USER
-
 type User {
   id: ID!
   email: String!
@@ -33,17 +32,10 @@ type User {
   animals: [Animal!]!
   favoriteAnimals: [Animal!]!
   adoptionRequests: [AdoptionRequest!]!
-  role: Role
+  role: Role!
 }
 
 type Role {
-  id: ID!
-  name: String!
-  displayName: String!
-  permissions: [Permissions!]!
-}
-
-type Permissions {
   id: ID!
   name: String!
   displayName: String!
@@ -86,7 +78,7 @@ input CreateUserInput {
   cnpj: String
   phone: String
   address: String
-  role: RolesEnum!
+  role: String!
 }
 
 input UpdateUserInput {
@@ -107,7 +99,6 @@ input LoginInput {
 input CreateRoleInput {
   name: String!
   displayName: String!
-  permissions: [String!]!
 }
 
 # ENUM
@@ -127,10 +118,4 @@ enum AnimalSize {
   MEDIUM
   LARGE
   EXTRA_LARGE
-}
-
-enum RolesEnum {
-  ADMIN
-  INSTITUTION
-  PERSON
 }

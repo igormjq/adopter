@@ -33,7 +33,7 @@ export default {
           }
         }
       }
-    }, `{ id name email role { name permissions { name }} }`);
+    }, `{ id name email role { name } }`);
 
     return {
       token: jwt.sign({ id: user.id }, process.env.JWT_SECRET),
@@ -41,7 +41,6 @@ export default {
     };
   },
   async updateUser(parent, { data }, { prisma, request }, info) {
-
     return prisma.mutation.updateUser({
       where: { id: request.user.id },
       data

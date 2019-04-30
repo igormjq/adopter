@@ -2,7 +2,7 @@ import { SchemaDirectiveVisitor } from 'graphql-tools';
 import { defaultFieldResolver } from 'graphql';
 import getUser from '../../utils/getUser';
 
-export default class RequiresDirective extends SchemaDirectiveVisitor {
+export default class HasRoleDirective extends SchemaDirectiveVisitor {
   /**
    * @override
    */
@@ -19,20 +19,21 @@ export default class RequiresDirective extends SchemaDirectiveVisitor {
    */
   visitFieldDefinition(field) {
     const { resolve = defaultFieldResolver } = field;
-    const { permission } = this.args;
+    const { role } = this.args;
 
     field.resolve = async function (parent, args, { prisma, request }, info) {
+      let user;
       const authenticatedUser = getUser(request.headers['authorization']);
 
       if (authenticatedUser) {
-        const user = await prisma.query.user({ 
+        user = await prisma.query.user({ 
           where: { id: authenticatedUser }},
-          `{ id role { name permissions { name } }}`
+          `{ id role { name }}`
         );
         
-        const userHasPermission = user.role.permissions.find(userPermission => userPermission.name === permission);
+        const userHasRole = user.role.name === role;
 
-        if (permission && userHasPermission) {
+        if (role && userHasRole) {
           request.user = user;
           return resolve.apply(this, arguments)
         };
