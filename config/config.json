@@ -1,6 +1,0 @@
-{
-  "development": {
-    "MONGODB_URI": "mongodb://localhost:27017/adopter-api",
-    "JWT_SECRET": "ahjs8499dfjd+"
-  }
-}
