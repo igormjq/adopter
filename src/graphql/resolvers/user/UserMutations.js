@@ -23,7 +23,6 @@ export default {
   },
   async createUser (parent, { data }, { prisma }, info) {
     const password = await bcrypt.hash(data.password, 10);
-    console.log('the fucking name', data.role);
     const user = await prisma.mutation.createUser({
       data: {
         ...data,
@@ -33,8 +32,8 @@ export default {
             name: data.role
           }
         }
-      },
-    }, `{ id name role { name displayName permissions { name displayName }} }`);
+      }
+    }, `{ id name email role { name permissions { name }} }`);
 
     return {
       token: jwt.sign({ id: user.id }, process.env.JWT_SECRET),

@@ -13,9 +13,10 @@ type Query {
 
 type Mutation {
   login(data: LoginInput): AuthPayload!
-  createUser(data: CreateUserInput): AuthPayload!
-  updateUser(data: UpdateUserInput): User! @auth
+  createUser(data: CreateUserInput!): AuthPayload!
+  updateUser(data: UpdateUserInput!): User! @auth
   deleteUser: User! @auth
+  createRole(data: CreateRoleInput!): Role!
 }
 
 # USER
@@ -101,6 +102,12 @@ input UpdateUserInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input CreateRoleInput {
+  name: String!
+  displayName: String!
+  permissions: [String!]!
 }
 
 # ENUM
