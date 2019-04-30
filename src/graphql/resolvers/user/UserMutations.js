@@ -23,13 +23,14 @@ export default {
   },
   async createUser (parent, { data }, { prisma }, info) {
     const password = await bcrypt.hash(data.password, 10);
+    console.log('the fucking name', data.role);
     const user = await prisma.mutation.createUser({
       data: {
         ...data,
         password,
         role: {
           connect: {
-            id: data.role
+            name: data.role
           }
         }
       },

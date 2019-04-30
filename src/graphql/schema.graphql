@@ -18,6 +18,8 @@ type Mutation {
   deleteUser: User! @auth
 }
 
+# USER
+
 type User {
   id: ID!
   email: String!
@@ -46,6 +48,11 @@ type Permissions {
   displayName: String!
 }
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 type Animal {
   id: ID!
   owner: User!
@@ -68,10 +75,7 @@ type AdoptionRequest {
   accepted: Boolean!
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
-}
+# INPUTS
 
 input CreateUserInput {
   email: String!
@@ -81,7 +85,7 @@ input CreateUserInput {
   cnpj: String
   phone: String
   address: String
-  role: ID!
+  role: RolesEnum!
 }
 
 input UpdateUserInput {
@@ -99,6 +103,7 @@ input LoginInput {
   password: String!
 }
 
+# ENUM
 enum AnimalType { 
   DOG
   CAT
@@ -115,4 +120,10 @@ enum AnimalSize {
   MEDIUM
   LARGE
   EXTRA_LARGE
+}
+
+enum RolesEnum {
+  ADMIN
+  INSTITUTION
+  PERSON
 }
