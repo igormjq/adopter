@@ -6,13 +6,25 @@ type User {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   animals: [Animal!]! @relation(name: "OwnerToAnimal", onDelete: CASCADE)
   favoriteAnimals: [Animal!]! @relation(name: "UserToFavoriteAnimals")
   adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
   role: Role! @relation(name: "UserToRole")
+  address: Address!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+type Address {
+  id: ID! @id
+  street: String!
+  number: String!
+  district: String!
+  complement: String
+  uf: String!
+  city: String!
+  lat: String
+  lng: String
 }
 
 type Role {
@@ -104,12 +116,6 @@ enum AnimalSize {
   MEDIUM
   LARGE
   EXTRA_LARGE
-}
-
-enum UserRoles {
-  ADMIN
-  PERSON
-  INSTITUTION
 }
 
 enum ReportType {

@@ -1,5 +1,543 @@
 # source: http://localhost:4466
-# timestamp: Tue Apr 30 2019 17:19:54 GMT-0300 (GMT-03:00)
+# timestamp: Tue Apr 30 2019 19:18:14 GMT-0300 (GMT-03:00)
+
+type Address implements Node {
+  id: ID!
+  street: String!
+  number: String!
+  district: String!
+  complement: String
+  uf: String!
+  city: String!
+  lat: String
+  lng: String
+}
+
+"""A connection to a list of items."""
+type AddressConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AddressEdge]!
+  aggregate: AggregateAddress!
+}
+
+input AddressCreateInput {
+  id: ID
+  street: String!
+  number: String!
+  district: String!
+  complement: String
+  uf: String!
+  city: String!
+  lat: String
+  lng: String
+}
+
+input AddressCreateOneInput {
+  create: AddressCreateInput
+  connect: AddressWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type AddressEdge {
+  """The item at the end of the edge."""
+  node: Address!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AddressOrderByInput {
+  id_ASC
+  id_DESC
+  street_ASC
+  street_DESC
+  number_ASC
+  number_DESC
+  district_ASC
+  district_DESC
+  complement_ASC
+  complement_DESC
+  uf_ASC
+  uf_DESC
+  city_ASC
+  city_DESC
+  lat_ASC
+  lat_DESC
+  lng_ASC
+  lng_DESC
+}
+
+type AddressPreviousValues {
+  id: ID!
+  street: String!
+  number: String!
+  district: String!
+  complement: String
+  uf: String!
+  city: String!
+  lat: String
+  lng: String
+}
+
+type AddressSubscriptionPayload {
+  mutation: MutationType!
+  node: Address
+  updatedFields: [String!]
+  previousValues: AddressPreviousValues
+}
+
+input AddressSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AddressSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AddressSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AddressSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AddressWhereInput
+}
+
+input AddressUpdateDataInput {
+  street: String
+  number: String
+  district: String
+  complement: String
+  uf: String
+  city: String
+  lat: String
+  lng: String
+}
+
+input AddressUpdateInput {
+  street: String
+  number: String
+  district: String
+  complement: String
+  uf: String
+  city: String
+  lat: String
+  lng: String
+}
+
+input AddressUpdateManyMutationInput {
+  street: String
+  number: String
+  district: String
+  complement: String
+  uf: String
+  city: String
+  lat: String
+  lng: String
+}
+
+input AddressUpdateOneRequiredInput {
+  create: AddressCreateInput
+  connect: AddressWhereUniqueInput
+  update: AddressUpdateDataInput
+  upsert: AddressUpsertNestedInput
+}
+
+input AddressUpsertNestedInput {
+  update: AddressUpdateDataInput!
+  create: AddressCreateInput!
+}
+
+input AddressWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AddressWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AddressWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AddressWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  street: String
+
+  """All values that are not equal to given value."""
+  street_not: String
+
+  """All values that are contained in given list."""
+  street_in: [String!]
+
+  """All values that are not contained in given list."""
+  street_not_in: [String!]
+
+  """All values less than the given value."""
+  street_lt: String
+
+  """All values less than or equal the given value."""
+  street_lte: String
+
+  """All values greater than the given value."""
+  street_gt: String
+
+  """All values greater than or equal the given value."""
+  street_gte: String
+
+  """All values containing the given string."""
+  street_contains: String
+
+  """All values not containing the given string."""
+  street_not_contains: String
+
+  """All values starting with the given string."""
+  street_starts_with: String
+
+  """All values not starting with the given string."""
+  street_not_starts_with: String
+
+  """All values ending with the given string."""
+  street_ends_with: String
+
+  """All values not ending with the given string."""
+  street_not_ends_with: String
+  number: String
+
+  """All values that are not equal to given value."""
+  number_not: String
+
+  """All values that are contained in given list."""
+  number_in: [String!]
+
+  """All values that are not contained in given list."""
+  number_not_in: [String!]
+
+  """All values less than the given value."""
+  number_lt: String
+
+  """All values less than or equal the given value."""
+  number_lte: String
+
+  """All values greater than the given value."""
+  number_gt: String
+
+  """All values greater than or equal the given value."""
+  number_gte: String
+
+  """All values containing the given string."""
+  number_contains: String
+
+  """All values not containing the given string."""
+  number_not_contains: String
+
+  """All values starting with the given string."""
+  number_starts_with: String
+
+  """All values not starting with the given string."""
+  number_not_starts_with: String
+
+  """All values ending with the given string."""
+  number_ends_with: String
+
+  """All values not ending with the given string."""
+  number_not_ends_with: String
+  district: String
+
+  """All values that are not equal to given value."""
+  district_not: String
+
+  """All values that are contained in given list."""
+  district_in: [String!]
+
+  """All values that are not contained in given list."""
+  district_not_in: [String!]
+
+  """All values less than the given value."""
+  district_lt: String
+
+  """All values less than or equal the given value."""
+  district_lte: String
+
+  """All values greater than the given value."""
+  district_gt: String
+
+  """All values greater than or equal the given value."""
+  district_gte: String
+
+  """All values containing the given string."""
+  district_contains: String
+
+  """All values not containing the given string."""
+  district_not_contains: String
+
+  """All values starting with the given string."""
+  district_starts_with: String
+
+  """All values not starting with the given string."""
+  district_not_starts_with: String
+
+  """All values ending with the given string."""
+  district_ends_with: String
+
+  """All values not ending with the given string."""
+  district_not_ends_with: String
+  complement: String
+
+  """All values that are not equal to given value."""
+  complement_not: String
+
+  """All values that are contained in given list."""
+  complement_in: [String!]
+
+  """All values that are not contained in given list."""
+  complement_not_in: [String!]
+
+  """All values less than the given value."""
+  complement_lt: String
+
+  """All values less than or equal the given value."""
+  complement_lte: String
+
+  """All values greater than the given value."""
+  complement_gt: String
+
+  """All values greater than or equal the given value."""
+  complement_gte: String
+
+  """All values containing the given string."""
+  complement_contains: String
+
+  """All values not containing the given string."""
+  complement_not_contains: String
+
+  """All values starting with the given string."""
+  complement_starts_with: String
+
+  """All values not starting with the given string."""
+  complement_not_starts_with: String
+
+  """All values ending with the given string."""
+  complement_ends_with: String
+
+  """All values not ending with the given string."""
+  complement_not_ends_with: String
+  uf: String
+
+  """All values that are not equal to given value."""
+  uf_not: String
+
+  """All values that are contained in given list."""
+  uf_in: [String!]
+
+  """All values that are not contained in given list."""
+  uf_not_in: [String!]
+
+  """All values less than the given value."""
+  uf_lt: String
+
+  """All values less than or equal the given value."""
+  uf_lte: String
+
+  """All values greater than the given value."""
+  uf_gt: String
+
+  """All values greater than or equal the given value."""
+  uf_gte: String
+
+  """All values containing the given string."""
+  uf_contains: String
+
+  """All values not containing the given string."""
+  uf_not_contains: String
+
+  """All values starting with the given string."""
+  uf_starts_with: String
+
+  """All values not starting with the given string."""
+  uf_not_starts_with: String
+
+  """All values ending with the given string."""
+  uf_ends_with: String
+
+  """All values not ending with the given string."""
+  uf_not_ends_with: String
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  lat: String
+
+  """All values that are not equal to given value."""
+  lat_not: String
+
+  """All values that are contained in given list."""
+  lat_in: [String!]
+
+  """All values that are not contained in given list."""
+  lat_not_in: [String!]
+
+  """All values less than the given value."""
+  lat_lt: String
+
+  """All values less than or equal the given value."""
+  lat_lte: String
+
+  """All values greater than the given value."""
+  lat_gt: String
+
+  """All values greater than or equal the given value."""
+  lat_gte: String
+
+  """All values containing the given string."""
+  lat_contains: String
+
+  """All values not containing the given string."""
+  lat_not_contains: String
+
+  """All values starting with the given string."""
+  lat_starts_with: String
+
+  """All values not starting with the given string."""
+  lat_not_starts_with: String
+
+  """All values ending with the given string."""
+  lat_ends_with: String
+
+  """All values not ending with the given string."""
+  lat_not_ends_with: String
+  lng: String
+
+  """All values that are not equal to given value."""
+  lng_not: String
+
+  """All values that are contained in given list."""
+  lng_in: [String!]
+
+  """All values that are not contained in given list."""
+  lng_not_in: [String!]
+
+  """All values less than the given value."""
+  lng_lt: String
+
+  """All values less than or equal the given value."""
+  lng_lte: String
+
+  """All values greater than the given value."""
+  lng_gt: String
+
+  """All values greater than or equal the given value."""
+  lng_gte: String
+
+  """All values containing the given string."""
+  lng_contains: String
+
+  """All values not containing the given string."""
+  lng_not_contains: String
+
+  """All values starting with the given string."""
+  lng_starts_with: String
+
+  """All values not starting with the given string."""
+  lng_not_starts_with: String
+
+  """All values ending with the given string."""
+  lng_ends_with: String
+
+  """All values not ending with the given string."""
+  lng_not_ends_with: String
+}
+
+input AddressWhereUniqueInput {
+  id: ID
+}
 
 type Adoption implements Node {
   id: ID!
@@ -600,6 +1138,10 @@ input AdoptionWhereInput {
 
 input AdoptionWhereUniqueInput {
   id: ID
+}
+
+type AggregateAddress {
+  count: Int!
 }
 
 type AggregateAdoption {
@@ -2176,6 +2718,7 @@ type Mutation {
   createComment(data: CommentCreateInput!): Comment!
   createAdoptionRequest(data: AdoptionRequestCreateInput!): AdoptionRequest!
   createUser(data: UserCreateInput!): User!
+  createAddress(data: AddressCreateInput!): Address!
   createRole(data: RoleCreateInput!): Role!
   updateAnimal(data: AnimalUpdateInput!, where: AnimalWhereUniqueInput!): Animal
   updateAdoption(data: AdoptionUpdateInput!, where: AdoptionWhereUniqueInput!): Adoption
@@ -2184,6 +2727,7 @@ type Mutation {
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
   updateAdoptionRequest(data: AdoptionRequestUpdateInput!, where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
   updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
   deleteAnimal(where: AnimalWhereUniqueInput!): Animal
   deleteAdoption(where: AdoptionWhereUniqueInput!): Adoption
@@ -2192,6 +2736,7 @@ type Mutation {
   deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteAdoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteAddress(where: AddressWhereUniqueInput!): Address
   deleteRole(where: RoleWhereUniqueInput!): Role
   upsertAnimal(where: AnimalWhereUniqueInput!, create: AnimalCreateInput!, update: AnimalUpdateInput!): Animal!
   upsertAdoption(where: AdoptionWhereUniqueInput!, create: AdoptionCreateInput!, update: AdoptionUpdateInput!): Adoption!
@@ -2200,6 +2745,7 @@ type Mutation {
   upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   upsertAdoptionRequest(where: AdoptionRequestWhereUniqueInput!, create: AdoptionRequestCreateInput!, update: AdoptionRequestUpdateInput!): AdoptionRequest!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
   upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
   updateManyAnimals(data: AnimalUpdateManyMutationInput!, where: AnimalWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
@@ -2207,6 +2753,7 @@ type Mutation {
   updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
   updateManyAdoptionRequests(data: AdoptionRequestUpdateManyMutationInput!, where: AdoptionRequestWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
   updateManyRoles(data: RoleUpdateManyMutationInput!, where: RoleWhereInput): BatchPayload!
   deleteManyAnimals(where: AnimalWhereInput): BatchPayload!
   deleteManyAdoptions(where: AdoptionWhereInput): BatchPayload!
@@ -2215,6 +2762,7 @@ type Mutation {
   deleteManyComments(where: CommentWhereInput): BatchPayload!
   deleteManyAdoptionRequests(where: AdoptionRequestWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyAddresses(where: AddressWhereInput): BatchPayload!
   deleteManyRoles(where: RoleWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -2258,6 +2806,7 @@ type Query {
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
   roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
   animal(where: AnimalWhereUniqueInput!): Animal
   adoption(where: AdoptionWhereUniqueInput!): Adoption
@@ -2266,6 +2815,7 @@ type Query {
   comment(where: CommentWhereUniqueInput!): Comment
   adoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   user(where: UserWhereUniqueInput!): User
+  address(where: AddressWhereUniqueInput!): Address
   role(where: RoleWhereUniqueInput!): Role
   animalsConnection(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnimalConnection!
   adoptionsConnection(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionConnection!
@@ -2274,6 +2824,7 @@ type Query {
   commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   adoptionRequestsConnection(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionRequestConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
   rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
 
   """Fetches an object given its ID"""
@@ -2922,6 +3473,7 @@ type Subscription {
   comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   adoptionRequest(where: AdoptionRequestSubscriptionWhereInput): AdoptionRequestSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
   role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
 }
 
@@ -2933,11 +3485,11 @@ type User implements Node {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   animals(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Animal!]
   favoriteAnimals(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Animal!]
   adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   role: Role!
+  address: Address!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2960,11 +3512,11 @@ input UserCreateInput {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   animals: AnimalCreateManyWithoutOwnerInput
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
   role: RoleCreateOneInput!
+  address: AddressCreateOneInput!
 }
 
 input UserCreateManyWithoutFavoriteAnimalsInput {
@@ -2995,10 +3547,10 @@ input UserCreateWithoutAdoptionRequestsInput {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   animals: AnimalCreateManyWithoutOwnerInput
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   role: RoleCreateOneInput!
+  address: AddressCreateOneInput!
 }
 
 input UserCreateWithoutAnimalsInput {
@@ -3009,10 +3561,10 @@ input UserCreateWithoutAnimalsInput {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
   role: RoleCreateOneInput!
+  address: AddressCreateOneInput!
 }
 
 input UserCreateWithoutFavoriteAnimalsInput {
@@ -3023,10 +3575,10 @@ input UserCreateWithoutFavoriteAnimalsInput {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   animals: AnimalCreateManyWithoutOwnerInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
   role: RoleCreateOneInput!
+  address: AddressCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -3053,8 +3605,6 @@ enum UserOrderByInput {
   cnpj_DESC
   phone_ASC
   phone_DESC
-  address_ASC
-  address_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -3069,7 +3619,6 @@ type UserPreviousValues {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3363,46 +3912,6 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   phone_not_ends_with: String
-  address: String
-
-  """All values that are not equal to given value."""
-  address_not: String
-
-  """All values that are contained in given list."""
-  address_in: [String!]
-
-  """All values that are not contained in given list."""
-  address_not_in: [String!]
-
-  """All values less than the given value."""
-  address_lt: String
-
-  """All values less than or equal the given value."""
-  address_lte: String
-
-  """All values greater than the given value."""
-  address_gt: String
-
-  """All values greater than or equal the given value."""
-  address_gte: String
-
-  """All values containing the given string."""
-  address_contains: String
-
-  """All values not containing the given string."""
-  address_not_contains: String
-
-  """All values starting with the given string."""
-  address_starts_with: String
-
-  """All values not starting with the given string."""
-  address_not_starts_with: String
-
-  """All values ending with the given string."""
-  address_ends_with: String
-
-  """All values not ending with the given string."""
-  address_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3493,11 +4002,11 @@ input UserUpdateDataInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
   role: RoleUpdateOneRequiredInput
+  address: AddressUpdateOneRequiredInput
 }
 
 input UserUpdateInput {
@@ -3507,11 +4016,11 @@ input UserUpdateInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
   role: RoleUpdateOneRequiredInput
+  address: AddressUpdateOneRequiredInput
 }
 
 input UserUpdateManyDataInput {
@@ -3521,7 +4030,6 @@ input UserUpdateManyDataInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
 }
 
 input UserUpdateManyMutationInput {
@@ -3531,7 +4039,6 @@ input UserUpdateManyMutationInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
 }
 
 input UserUpdateManyWithoutFavoriteAnimalsInput {
@@ -3579,10 +4086,10 @@ input UserUpdateWithoutAdoptionRequestsDataInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   role: RoleUpdateOneRequiredInput
+  address: AddressUpdateOneRequiredInput
 }
 
 input UserUpdateWithoutAnimalsDataInput {
@@ -3592,10 +4099,10 @@ input UserUpdateWithoutAnimalsDataInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
   role: RoleUpdateOneRequiredInput
+  address: AddressUpdateOneRequiredInput
 }
 
 input UserUpdateWithoutFavoriteAnimalsDataInput {
@@ -3605,10 +4112,10 @@ input UserUpdateWithoutFavoriteAnimalsDataInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
   animals: AnimalUpdateManyWithoutOwnerInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
   role: RoleUpdateOneRequiredInput
+  address: AddressUpdateOneRequiredInput
 }
 
 input UserUpdateWithWhereUniqueWithoutFavoriteAnimalsInput {
@@ -3926,46 +4433,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   phone_not_ends_with: String
-  address: String
-
-  """All values that are not equal to given value."""
-  address_not: String
-
-  """All values that are contained in given list."""
-  address_in: [String!]
-
-  """All values that are not contained in given list."""
-  address_not_in: [String!]
-
-  """All values less than the given value."""
-  address_lt: String
-
-  """All values less than or equal the given value."""
-  address_lte: String
-
-  """All values greater than the given value."""
-  address_gt: String
-
-  """All values greater than or equal the given value."""
-  address_gte: String
-
-  """All values containing the given string."""
-  address_contains: String
-
-  """All values not containing the given string."""
-  address_not_contains: String
-
-  """All values starting with the given string."""
-  address_starts_with: String
-
-  """All values not starting with the given string."""
-  address_not_starts_with: String
-
-  """All values ending with the given string."""
-  address_ends_with: String
-
-  """All values not ending with the given string."""
-  address_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -4020,6 +4487,7 @@ input UserWhereInput {
   adoptionRequests_some: AdoptionRequestWhereInput
   adoptionRequests_none: AdoptionRequestWhereInput
   role: RoleWhereInput
+  address: AddressWhereInput
 }
 
 input UserWhereUniqueInput {

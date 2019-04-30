@@ -28,7 +28,7 @@ type User {
   cpf: String
   cnpj: String
   phone: String!
-  address: String!
+  address: Address!
   animals: [Animal!]!
   favoriteAnimals: [Animal!]!
   adoptionRequests: [AdoptionRequest!]!
@@ -39,6 +39,18 @@ type Role {
   id: ID!
   name: String!
   displayName: String!
+}
+
+type Address {
+  id: ID!
+  street: String!
+  number: String!
+  district: String!
+  complement: String
+  uf: String!
+  city: String!
+  lat: String
+  lng: String
 }
 
 type AuthPayload {
@@ -77,7 +89,7 @@ input CreateUserInput {
   cpf: String
   cnpj: String
   phone: String
-  address: String
+  address: AddressInput
   role: String!
 }
 
@@ -89,6 +101,15 @@ input UpdateUserInput {
   cnpj: String
   phone: String
   address: String
+}
+
+input AddressInput {
+  street: String!
+  number: String!
+  district: String!
+  complement: String
+  uf: String!
+  city: String!
 }
 
 input LoginInput {

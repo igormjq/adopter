@@ -31,6 +31,11 @@ export default {
           connect: {
             name: data.role
           }
+        },
+        address: {
+          create: {
+            ...data.address
+          }
         }
       }
     }, `{ id name email role { name } }`);
