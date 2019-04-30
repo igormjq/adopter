@@ -17,6 +17,7 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User! @auth
   deleteUser: User! @auth
   createRole(data: CreateRoleInput!): Role! @hasRole(role: "admin")
+  createAnimal(data: CreateAnimalInput!): Animal! @auth
 }
 
 # USER
@@ -122,6 +123,16 @@ input CreateRoleInput {
   displayName: String!
 }
 
+input CreateAnimalInput {
+  name: String!
+  type: AnimalType!
+  size: AnimalSize!
+  gender: AnimalGender
+  castrated: Boolean
+  vaccinated: Boolean
+  about: String!
+}
+
 # ENUM
 enum AnimalType { 
   DOG
@@ -134,9 +145,7 @@ enum AnimalGender {
 }
 
 enum AnimalSize {
-  EXTRA_SMALL
   SMALL
   MEDIUM
   LARGE
-  EXTRA_LARGE
 }
