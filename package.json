@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/www/index.js --ext js,graphql --exec babel-node",
     "get-schema": "graphql get-schema -p prisma",
-    "db:seed": "babel-node ./db/seeder/index.js",
+    "db:seed": "babel-node ./db/seeder/index.js"
   },
   "keywords": [],
   "author": "",
