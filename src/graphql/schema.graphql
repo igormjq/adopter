@@ -16,7 +16,7 @@ type Mutation {
   createUser(data: CreateUserInput!): AuthPayload!
   updateUser(data: UpdateUserInput!): User! @auth
   deleteUser: User! @auth
-  createRole(data: CreateRoleInput!): Role! @hasRole(role: "admin")
+  createRole(data: CreateRoleInput!): Role! @hasRole(role: "ADMIN")
   createAnimal(data: CreateAnimalInput!): Animal! @auth
 }
 
