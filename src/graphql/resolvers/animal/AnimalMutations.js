@@ -16,7 +16,7 @@ export default {
     }, info);
   },
   async updateAnimal(parent, { id, data }, { prisma, request }, info) {
-    const allowed = await !isSameUser(prisma, id, request.user.id);
+    const allowed = await isSameUser(prisma, id, request.user.id);
 
     if(!allowed) throw new Error('Apenas cadastrados pelo mesmo usuário podem ser editados');
 
