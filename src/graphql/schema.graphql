@@ -18,6 +18,7 @@ type Mutation {
   deleteUser: User! @auth
   createRole(data: CreateRoleInput!): Role! @hasRole(role: "ADMIN")
   createAnimal(data: CreateAnimalInput!): Animal! @auth
+  updateAnimal(id: ID!, data: UpdateAnimalInput!): Animal! @auth
 }
 
 # USER
@@ -131,6 +132,15 @@ input CreateAnimalInput {
   castrated: Boolean
   vaccinated: Boolean
   about: String!
+}
+
+input UpdateAnimalInput {
+  name: String
+  size: AnimalSize
+  gender: AnimalGender
+  castrated: Boolean
+  vaccinated: Boolean
+  about: String
 }
 
 # ENUM
