@@ -25,5 +25,12 @@ export default {
       data: { ...data }
     });
   },
+  async deleteAnimal(parent, { id }, { prisma, request }, info) {
+    const allowed = await isSameUser(prisma, id, request.user.id);
+
+    if(!allowed) throw new Error('Apenas cadastrados pelo mesmo usuário podem ser excluidos');
+
+    return prisma.mutation.deleteAnimal({ where: { id }});
+  }
 
 }

@@ -19,6 +19,7 @@ type Mutation {
   createRole(data: CreateRoleInput!): Role! @hasRole(role: "ADMIN")
   createAnimal(data: CreateAnimalInput!): Animal! @auth
   updateAnimal(id: ID!, data: UpdateAnimalInput!): Animal! @auth
+  deleteAnimal(id: ID!): Animal! @auth
 }
 
 # USER
