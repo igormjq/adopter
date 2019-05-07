@@ -24,7 +24,7 @@ services:
     restart: always
     # Uncomment the next two lines to connect to your your database from outside the Docker environment, e.g. using a database GUI like Workbench
     ports:
-    - "3306:3306"
+    - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: prisma
     volumes:
