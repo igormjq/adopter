@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Apr 30 2019 19:18:14 GMT-0300 (GMT-03:00)
+# timestamp: Tue May 07 2019 14:59:51 GMT-0300 (GMT-03:00)
 
 type Address implements Node {
   id: ID!
@@ -1180,6 +1180,7 @@ type Animal implements Node {
   id: ID!
   owner: User!
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1187,6 +1188,7 @@ type Animal implements Node {
   vaccinated: Boolean
   available: Boolean!
   about: String!
+  photos: String
   likedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   requestedIn(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   createdAt: DateTime!
@@ -1206,6 +1208,7 @@ type AnimalConnection {
 input AnimalCreateInput {
   id: ID
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1213,6 +1216,7 @@ input AnimalCreateInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
+  photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
@@ -1236,6 +1240,7 @@ input AnimalCreateOneWithoutRequestedInInput {
 input AnimalCreateWithoutLikedByInput {
   id: ID
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1243,6 +1248,7 @@ input AnimalCreateWithoutLikedByInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
+  photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
@@ -1250,6 +1256,7 @@ input AnimalCreateWithoutLikedByInput {
 input AnimalCreateWithoutOwnerInput {
   id: ID
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1257,6 +1264,7 @@ input AnimalCreateWithoutOwnerInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
+  photos: String
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
@@ -1264,6 +1272,7 @@ input AnimalCreateWithoutOwnerInput {
 input AnimalCreateWithoutRequestedInInput {
   id: ID
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1271,6 +1280,7 @@ input AnimalCreateWithoutRequestedInInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
+  photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
 }
@@ -1294,6 +1304,8 @@ enum AnimalOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  profileImg_ASC
+  profileImg_DESC
   type_ASC
   type_DESC
   size_ASC
@@ -1308,6 +1320,8 @@ enum AnimalOrderByInput {
   available_DESC
   about_ASC
   about_DESC
+  photos_ASC
+  photos_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1317,6 +1331,7 @@ enum AnimalOrderByInput {
 type AnimalPreviousValues {
   id: ID!
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1324,6 +1339,7 @@ type AnimalPreviousValues {
   vaccinated: Boolean
   available: Boolean!
   about: String!
+  photos: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1417,6 +1433,46 @@ input AnimalScalarWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  profileImg: String
+
+  """All values that are not equal to given value."""
+  profileImg_not: String
+
+  """All values that are contained in given list."""
+  profileImg_in: [String!]
+
+  """All values that are not contained in given list."""
+  profileImg_not_in: [String!]
+
+  """All values less than the given value."""
+  profileImg_lt: String
+
+  """All values less than or equal the given value."""
+  profileImg_lte: String
+
+  """All values greater than the given value."""
+  profileImg_gt: String
+
+  """All values greater than or equal the given value."""
+  profileImg_gte: String
+
+  """All values containing the given string."""
+  profileImg_contains: String
+
+  """All values not containing the given string."""
+  profileImg_not_contains: String
+
+  """All values starting with the given string."""
+  profileImg_starts_with: String
+
+  """All values not starting with the given string."""
+  profileImg_not_starts_with: String
+
+  """All values ending with the given string."""
+  profileImg_ends_with: String
+
+  """All values not ending with the given string."""
+  profileImg_not_ends_with: String
   type: AnimalType
 
   """All values that are not equal to given value."""
@@ -1499,6 +1555,46 @@ input AnimalScalarWhereInput {
 
   """All values not ending with the given string."""
   about_not_ends_with: String
+  photos: String
+
+  """All values that are not equal to given value."""
+  photos_not: String
+
+  """All values that are contained in given list."""
+  photos_in: [String!]
+
+  """All values that are not contained in given list."""
+  photos_not_in: [String!]
+
+  """All values less than the given value."""
+  photos_lt: String
+
+  """All values less than or equal the given value."""
+  photos_lte: String
+
+  """All values greater than the given value."""
+  photos_gt: String
+
+  """All values greater than or equal the given value."""
+  photos_gte: String
+
+  """All values containing the given string."""
+  photos_contains: String
+
+  """All values not containing the given string."""
+  photos_not_contains: String
+
+  """All values starting with the given string."""
+  photos_starts_with: String
+
+  """All values not starting with the given string."""
+  photos_not_starts_with: String
+
+  """All values ending with the given string."""
+  photos_ends_with: String
+
+  """All values not ending with the given string."""
+  photos_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -1597,6 +1693,7 @@ enum AnimalType {
 
 input AnimalUpdateInput {
   name: String
+  profileImg: String
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
@@ -1604,6 +1701,7 @@ input AnimalUpdateInput {
   vaccinated: Boolean
   available: Boolean
   about: String
+  photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
@@ -1611,6 +1709,7 @@ input AnimalUpdateInput {
 
 input AnimalUpdateManyDataInput {
   name: String
+  profileImg: String
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
@@ -1618,10 +1717,12 @@ input AnimalUpdateManyDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
+  photos: String
 }
 
 input AnimalUpdateManyMutationInput {
   name: String
+  profileImg: String
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
@@ -1629,6 +1730,7 @@ input AnimalUpdateManyMutationInput {
   vaccinated: Boolean
   available: Boolean
   about: String
+  photos: String
 }
 
 input AnimalUpdateManyWithoutLikedByInput {
@@ -1669,6 +1771,7 @@ input AnimalUpdateOneRequiredWithoutRequestedInInput {
 
 input AnimalUpdateWithoutLikedByDataInput {
   name: String
+  profileImg: String
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
@@ -1676,12 +1779,14 @@ input AnimalUpdateWithoutLikedByDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
+  photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
 
 input AnimalUpdateWithoutOwnerDataInput {
   name: String
+  profileImg: String
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
@@ -1689,12 +1794,14 @@ input AnimalUpdateWithoutOwnerDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
+  photos: String
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
 
 input AnimalUpdateWithoutRequestedInDataInput {
   name: String
+  profileImg: String
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
@@ -1702,6 +1809,7 @@ input AnimalUpdateWithoutRequestedInDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
+  photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
 }
@@ -1822,6 +1930,46 @@ input AnimalWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  profileImg: String
+
+  """All values that are not equal to given value."""
+  profileImg_not: String
+
+  """All values that are contained in given list."""
+  profileImg_in: [String!]
+
+  """All values that are not contained in given list."""
+  profileImg_not_in: [String!]
+
+  """All values less than the given value."""
+  profileImg_lt: String
+
+  """All values less than or equal the given value."""
+  profileImg_lte: String
+
+  """All values greater than the given value."""
+  profileImg_gt: String
+
+  """All values greater than or equal the given value."""
+  profileImg_gte: String
+
+  """All values containing the given string."""
+  profileImg_contains: String
+
+  """All values not containing the given string."""
+  profileImg_not_contains: String
+
+  """All values starting with the given string."""
+  profileImg_starts_with: String
+
+  """All values not starting with the given string."""
+  profileImg_not_starts_with: String
+
+  """All values ending with the given string."""
+  profileImg_ends_with: String
+
+  """All values not ending with the given string."""
+  profileImg_not_ends_with: String
   type: AnimalType
 
   """All values that are not equal to given value."""
@@ -1904,6 +2052,46 @@ input AnimalWhereInput {
 
   """All values not ending with the given string."""
   about_not_ends_with: String
+  photos: String
+
+  """All values that are not equal to given value."""
+  photos_not: String
+
+  """All values that are contained in given list."""
+  photos_in: [String!]
+
+  """All values that are not contained in given list."""
+  photos_not_in: [String!]
+
+  """All values less than the given value."""
+  photos_lt: String
+
+  """All values less than or equal the given value."""
+  photos_lte: String
+
+  """All values greater than the given value."""
+  photos_gt: String
+
+  """All values greater than or equal the given value."""
+  photos_gte: String
+
+  """All values containing the given string."""
+  photos_contains: String
+
+  """All values not containing the given string."""
+  photos_not_contains: String
+
+  """All values starting with the given string."""
+  photos_starts_with: String
+
+  """All values not starting with the given string."""
+  photos_not_starts_with: String
+
+  """All values ending with the given string."""
+  photos_ends_with: String
+
+  """All values not ending with the given string."""
+  photos_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3490,6 +3678,7 @@ type User implements Node {
   adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   role: Role!
   address: Address!
+  profileImg: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3512,6 +3701,7 @@ input UserCreateInput {
   cpf: String
   cnpj: String
   phone: String!
+  profileImg: String
   animals: AnimalCreateManyWithoutOwnerInput
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
@@ -3547,6 +3737,7 @@ input UserCreateWithoutAdoptionRequestsInput {
   cpf: String
   cnpj: String
   phone: String!
+  profileImg: String
   animals: AnimalCreateManyWithoutOwnerInput
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   role: RoleCreateOneInput!
@@ -3561,6 +3752,7 @@ input UserCreateWithoutAnimalsInput {
   cpf: String
   cnpj: String
   phone: String!
+  profileImg: String
   favoriteAnimals: AnimalCreateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
   role: RoleCreateOneInput!
@@ -3575,6 +3767,7 @@ input UserCreateWithoutFavoriteAnimalsInput {
   cpf: String
   cnpj: String
   phone: String!
+  profileImg: String
   animals: AnimalCreateManyWithoutOwnerInput
   adoptionRequests: AdoptionRequestCreateManyWithoutSentByInput
   role: RoleCreateOneInput!
@@ -3605,6 +3798,8 @@ enum UserOrderByInput {
   cnpj_DESC
   phone_ASC
   phone_DESC
+  profileImg_ASC
+  profileImg_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -3619,6 +3814,7 @@ type UserPreviousValues {
   cpf: String
   cnpj: String
   phone: String!
+  profileImg: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -3912,6 +4108,46 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   phone_not_ends_with: String
+  profileImg: String
+
+  """All values that are not equal to given value."""
+  profileImg_not: String
+
+  """All values that are contained in given list."""
+  profileImg_in: [String!]
+
+  """All values that are not contained in given list."""
+  profileImg_not_in: [String!]
+
+  """All values less than the given value."""
+  profileImg_lt: String
+
+  """All values less than or equal the given value."""
+  profileImg_lte: String
+
+  """All values greater than the given value."""
+  profileImg_gt: String
+
+  """All values greater than or equal the given value."""
+  profileImg_gte: String
+
+  """All values containing the given string."""
+  profileImg_contains: String
+
+  """All values not containing the given string."""
+  profileImg_not_contains: String
+
+  """All values starting with the given string."""
+  profileImg_starts_with: String
+
+  """All values not starting with the given string."""
+  profileImg_not_starts_with: String
+
+  """All values ending with the given string."""
+  profileImg_ends_with: String
+
+  """All values not ending with the given string."""
+  profileImg_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -4002,6 +4238,7 @@ input UserUpdateDataInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
@@ -4016,6 +4253,7 @@ input UserUpdateInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
@@ -4030,6 +4268,7 @@ input UserUpdateManyDataInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
 }
 
 input UserUpdateManyMutationInput {
@@ -4039,6 +4278,7 @@ input UserUpdateManyMutationInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
 }
 
 input UserUpdateManyWithoutFavoriteAnimalsInput {
@@ -4086,6 +4326,7 @@ input UserUpdateWithoutAdoptionRequestsDataInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
   animals: AnimalUpdateManyWithoutOwnerInput
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   role: RoleUpdateOneRequiredInput
@@ -4099,6 +4340,7 @@ input UserUpdateWithoutAnimalsDataInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
   favoriteAnimals: AnimalUpdateManyWithoutLikedByInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
   role: RoleUpdateOneRequiredInput
@@ -4112,6 +4354,7 @@ input UserUpdateWithoutFavoriteAnimalsDataInput {
   cpf: String
   cnpj: String
   phone: String
+  profileImg: String
   animals: AnimalUpdateManyWithoutOwnerInput
   adoptionRequests: AdoptionRequestUpdateManyWithoutSentByInput
   role: RoleUpdateOneRequiredInput
@@ -4433,6 +4676,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   phone_not_ends_with: String
+  profileImg: String
+
+  """All values that are not equal to given value."""
+  profileImg_not: String
+
+  """All values that are contained in given list."""
+  profileImg_in: [String!]
+
+  """All values that are not contained in given list."""
+  profileImg_not_in: [String!]
+
+  """All values less than the given value."""
+  profileImg_lt: String
+
+  """All values less than or equal the given value."""
+  profileImg_lte: String
+
+  """All values greater than the given value."""
+  profileImg_gt: String
+
+  """All values greater than or equal the given value."""
+  profileImg_gte: String
+
+  """All values containing the given string."""
+  profileImg_contains: String
+
+  """All values not containing the given string."""
+  profileImg_not_contains: String
+
+  """All values starting with the given string."""
+  profileImg_starts_with: String
+
+  """All values not starting with the given string."""
+  profileImg_not_starts_with: String
+
+  """All values ending with the given string."""
+  profileImg_ends_with: String
+
+  """All values not ending with the given string."""
+  profileImg_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""

@@ -11,6 +11,7 @@ type User {
   adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
   role: Role! @relation(name: "UserToRole")
   address: Address!
+  profileImg: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -39,6 +40,7 @@ type Animal {
   id: ID! @id
   owner: User! @relation(name: "OwnerToAnimal")
   name: String!
+  profileImg: String!
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -46,6 +48,7 @@ type Animal {
   vaccinated: Boolean
   available: Boolean! @default(value: true)
   about: String!
+  photos: String
   likedBy: [User!]! @relation(name: "UserToFavoriteAnimals")
   requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
