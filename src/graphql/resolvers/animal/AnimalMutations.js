@@ -19,7 +19,7 @@ export default {
   async updateAnimal(parent, { id, data }, { prisma, request }, info) {
     const allowed = await isSameUser(prisma, id, request.user.id);
 
-    if(!allowed) throw new Error('Apenas cadastrados pelo mesmo usuário podem ser editados');
+    if(!allowed) throw new Error('Apenas animais cadastrados pelo mesmo usuário podem ser editados');
 
     return prisma.mutation.updateAnimal({
       where: { id },
