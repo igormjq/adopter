@@ -48,7 +48,7 @@ type Animal {
   vaccinated: Boolean
   available: Boolean! @default(value: true)
   about: String!
-  photos: String @default(value: "'{}'")
+  photos: Json
   likedBy: [User!]! @relation(name: "UserToFavoriteAnimals")
   requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
   createdAt: DateTime! @createdAt
