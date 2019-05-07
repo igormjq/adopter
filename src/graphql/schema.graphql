@@ -3,6 +3,7 @@ directive @hasRole(
 ) on OBJECT | FIELD_DEFINITION
 
 directive @auth on FIELD_DEFINITION
+directive @JsonParse on FIELD_DEFINITION
 
 type Query {
   users: [User!]!
@@ -28,6 +29,7 @@ type User {
   email: String!
   password: String
   name: String!
+  profileImg: String
   cpf: String
   cnpj: String
   phone: String!
@@ -72,6 +74,8 @@ type Animal {
   vaccinated: Boolean
   available: Boolean
   about: String!
+  profileImg: String
+  photos: String
   likedBy: [User!]!
   requestedIn: [AdoptionRequest!]!
 }

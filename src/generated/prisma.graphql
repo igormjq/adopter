@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue May 07 2019 14:59:51 GMT-0300 (GMT-03:00)
+# timestamp: Tue May 07 2019 16:38:59 GMT-0300 (GMT-03:00)
 
 type Address implements Node {
   id: ID!
@@ -1180,7 +1180,7 @@ type Animal implements Node {
   id: ID!
   owner: User!
   name: String!
-  profileImg: String!
+  profileImg: String
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1208,7 +1208,7 @@ type AnimalConnection {
 input AnimalCreateInput {
   id: ID
   name: String!
-  profileImg: String!
+  profileImg: String
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1240,7 +1240,7 @@ input AnimalCreateOneWithoutRequestedInInput {
 input AnimalCreateWithoutLikedByInput {
   id: ID
   name: String!
-  profileImg: String!
+  profileImg: String
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1256,7 +1256,7 @@ input AnimalCreateWithoutLikedByInput {
 input AnimalCreateWithoutOwnerInput {
   id: ID
   name: String!
-  profileImg: String!
+  profileImg: String
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1272,7 +1272,7 @@ input AnimalCreateWithoutOwnerInput {
 input AnimalCreateWithoutRequestedInInput {
   id: ID
   name: String!
-  profileImg: String!
+  profileImg: String
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
@@ -1331,7 +1331,7 @@ enum AnimalOrderByInput {
 type AnimalPreviousValues {
   id: ID!
   name: String!
-  profileImg: String!
+  profileImg: String
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
