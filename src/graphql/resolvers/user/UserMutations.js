@@ -22,6 +22,8 @@ export default {
 
   },
   async createUser (parent, { data }, { prisma }, info) {
+    if(data.role === 'PERSON' && !data.cpf) throw new Error('CPF obrigatório');
+    
     const password = await bcrypt.hash(data.password, 10);
     const user = await prisma.mutation.createUser({
       data: {

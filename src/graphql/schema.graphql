@@ -96,7 +96,7 @@ input CreateUserInput {
   cnpj: String
   phone: String
   address: AddressInput
-  role: String!
+  role: UserRole!
 }
 
 input UpdateUserInput {
@@ -171,4 +171,9 @@ enum AnimalSize {
   SMALL
   MEDIUM
   LARGE
+}
+
+enum UserRole {
+  PERSON,
+  INSTITUTION
 }
