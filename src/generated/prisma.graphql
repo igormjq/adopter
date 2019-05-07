@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue May 07 2019 16:43:38 GMT-0300 (GMT-03:00)
+# timestamp: Tue May 07 2019 18:16:18 GMT-0300 (GMT-03:00)
 
 type Address implements Node {
   id: ID!
@@ -1188,7 +1188,7 @@ type Animal implements Node {
   vaccinated: Boolean
   available: Boolean!
   about: String!
-  photos: Json
+  photos: String
   likedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   requestedIn(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   createdAt: DateTime!
@@ -1216,7 +1216,7 @@ input AnimalCreateInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
-  photos: Json
+  photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
@@ -1248,7 +1248,7 @@ input AnimalCreateWithoutLikedByInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
-  photos: Json
+  photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
@@ -1264,7 +1264,7 @@ input AnimalCreateWithoutOwnerInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
-  photos: Json
+  photos: String
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
@@ -1280,7 +1280,7 @@ input AnimalCreateWithoutRequestedInInput {
   vaccinated: Boolean
   available: Boolean
   about: String!
-  photos: Json
+  photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
 }
@@ -1339,7 +1339,7 @@ type AnimalPreviousValues {
   vaccinated: Boolean
   available: Boolean!
   about: String!
-  photos: Json
+  photos: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1555,6 +1555,46 @@ input AnimalScalarWhereInput {
 
   """All values not ending with the given string."""
   about_not_ends_with: String
+  photos: String
+
+  """All values that are not equal to given value."""
+  photos_not: String
+
+  """All values that are contained in given list."""
+  photos_in: [String!]
+
+  """All values that are not contained in given list."""
+  photos_not_in: [String!]
+
+  """All values less than the given value."""
+  photos_lt: String
+
+  """All values less than or equal the given value."""
+  photos_lte: String
+
+  """All values greater than the given value."""
+  photos_gt: String
+
+  """All values greater than or equal the given value."""
+  photos_gte: String
+
+  """All values containing the given string."""
+  photos_contains: String
+
+  """All values not containing the given string."""
+  photos_not_contains: String
+
+  """All values starting with the given string."""
+  photos_starts_with: String
+
+  """All values not starting with the given string."""
+  photos_not_starts_with: String
+
+  """All values ending with the given string."""
+  photos_ends_with: String
+
+  """All values not ending with the given string."""
+  photos_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -1661,7 +1701,7 @@ input AnimalUpdateInput {
   vaccinated: Boolean
   available: Boolean
   about: String
-  photos: Json
+  photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
@@ -1677,7 +1717,7 @@ input AnimalUpdateManyDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
-  photos: Json
+  photos: String
 }
 
 input AnimalUpdateManyMutationInput {
@@ -1690,7 +1730,7 @@ input AnimalUpdateManyMutationInput {
   vaccinated: Boolean
   available: Boolean
   about: String
-  photos: Json
+  photos: String
 }
 
 input AnimalUpdateManyWithoutLikedByInput {
@@ -1739,7 +1779,7 @@ input AnimalUpdateWithoutLikedByDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
-  photos: Json
+  photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
@@ -1754,7 +1794,7 @@ input AnimalUpdateWithoutOwnerDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
-  photos: Json
+  photos: String
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
@@ -1769,7 +1809,7 @@ input AnimalUpdateWithoutRequestedInDataInput {
   vaccinated: Boolean
   available: Boolean
   about: String
-  photos: Json
+  photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
 }
@@ -2012,6 +2052,46 @@ input AnimalWhereInput {
 
   """All values not ending with the given string."""
   about_not_ends_with: String
+  photos: String
+
+  """All values that are not equal to given value."""
+  photos_not: String
+
+  """All values that are contained in given list."""
+  photos_in: [String!]
+
+  """All values that are not contained in given list."""
+  photos_not_in: [String!]
+
+  """All values less than the given value."""
+  photos_lt: String
+
+  """All values less than or equal the given value."""
+  photos_lte: String
+
+  """All values greater than the given value."""
+  photos_gt: String
+
+  """All values greater than or equal the given value."""
+  photos_gte: String
+
+  """All values containing the given string."""
+  photos_contains: String
+
+  """All values not containing the given string."""
+  photos_not_contains: String
+
+  """All values starting with the given string."""
+  photos_starts_with: String
+
+  """All values not starting with the given string."""
+  photos_not_starts_with: String
+
+  """All values ending with the given string."""
+  photos_ends_with: String
+
+  """All values not ending with the given string."""
+  photos_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""

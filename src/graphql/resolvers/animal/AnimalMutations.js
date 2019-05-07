@@ -7,6 +7,7 @@ export default {
     return prisma.mutation.createAnimal({
       data: {
         ...data,
+        photos: JSON.stringify(data.photos),
         owner: {
           connect: {
             id: request.user.id

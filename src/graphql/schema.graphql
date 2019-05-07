@@ -137,6 +137,15 @@ input CreateAnimalInput {
   castrated: Boolean
   vaccinated: Boolean
   about: String!
+  photos: PhotoInput
+}
+
+input PhotoInput {
+  data: [String]
+}
+
+type Photo {
+  data: [String]
 }
 
 input UpdateAnimalInput {
