@@ -1,5 +1,13 @@
 import bcrypt from 'bcryptjs';
 import prisma from '../../src/prisma';
+import faker from 'faker'
+
+const pickRandomRole = () => {
+  const roles = ["PERSON", "INSTITUTION"];
+  return roles[Math.floor(Math.random() * roles.length)];
+}
+
+faker.locale ='pt_BR';
 
 export default async () => {
   await prisma.mutation.createUser({
@@ -8,6 +16,7 @@ export default async () => {
       email: "igormjq@gmail.com",
       password: (await bcrypt.hash('adopter', 10)),
       phone: "+5553981189503",
+      profileImg: faker.image.avatar(),
       role: {
         connect: {
           name: "ADMIN"
@@ -31,6 +40,7 @@ export default async () => {
       email: "mgl.deadly@gmail.com",
       password: (await bcrypt.hash('adopter', 10)),
       phone: "+5553981189503",
+      profileImg: faker.image.avatar(),
       role: {
         connect: {
           name: "PERSON"
@@ -53,8 +63,9 @@ export default async () => {
       name: "ONG Amigos Dos Animais",
       email: "amigos.ong@amigos.com",
       password: (await bcrypt.hash('adopter', 10)),
-      phone: "+5553981189503",
+      phone: "+5551981189503",
       cnpj: "011.145.1400-600",
+      profileImg: faker.image.avatar(),
       role: {
         connect: {
           name: "INSTITUTION"
@@ -72,4 +83,60 @@ export default async () => {
       }
     }
   });
+
+  await prisma.mutation.createUser({
+    data: {
+      name: "ONG Prefeitura de Pelotas",
+      email: "ong.prefeitura@pelotasa.gov.br",
+      password: (await bcrypt.hash('adopter', 10)),
+      phone: "+555398999999",
+      profileImg: faker.image.avatar(),
+      cnpj: "011.145.1400-600",
+      role: {
+        connect: {
+          name: "INSTITUTION"
+        }
+      },
+      address: {
+        create: {
+          street: "Praça Coronel Pedro Osório",
+          number: "561",
+          district: "Centro",
+          city: "Pelotas",
+          uf: "RS"
+        }
+      }
+    }
+  });
+
+  // faker
+  for(let i=0; i < 10; i++) {
+    const randomRole = pickRandomRole();
+
+    await prisma.mutation.createUser({
+      data: {
+        name: randomRole === 'PERSON' ? faker.name.firstName() : `ONG ${ faker.company.companyName() }`,
+        email: faker.internet.email(),
+        password: (await bcrypt.hash('adopter', 10)),
+        phone: faker.phone.phoneNumber(),
+        cnpj: randomRole === 'INSTITUTION' ? '011.145.1400-600' : null,
+        cpf: randomRole === 'PERSON' ? '030.992.140-60' : null,
+        profileImg: faker.image.avatar(),
+        role: {
+          connect: {
+            name: randomRole
+          }
+        },
+        address: {
+          create: {
+            street: faker.address.streetName(),
+            number: Math.round((Math.random() * 1000)).toString(),
+            district: `${faker.name.firstName()} ${faker.name.lastName()}`,
+            city: faker.address.city(),
+            uf: faker.address.stateAbbr()
+          }
+        }
+      }
+    });
+  }
 }
