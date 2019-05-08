@@ -20,7 +20,7 @@ type Mutation {
   createAnimal(data: CreateAnimalInput!): Animal! @auth
   updateAnimal(id: ID!, data: UpdateAnimalInput!): Animal! @auth
   deleteAnimal(id: ID!): Animal! @auth
-  likeAnimal(animalId: ID!): SuccessRequest! @auth
+  toggleFavoriteAnimal(animalId: ID!): SuccessRequest! @auth
 }
 
 # USER
@@ -89,6 +89,7 @@ type AdoptionRequest {
 
 type SuccessRequest {
   success: Boolean
+  message: String
 }
 
 # INPUTS

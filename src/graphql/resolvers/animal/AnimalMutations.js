@@ -33,18 +33,19 @@ export default {
 
     return prisma.mutation.deleteAnimal({ where: { id }});
   },
-  async likeAnimal(parent, { animalId }, { prisma, request }, info) {
-    const test = await prisma.exists.Animal({ id: animalId, likedBy: {
-      connect: { id: request.id }
-    }});
-
-    console.log('ta e ai existe??', test);
+  async toggleFavoriteAnimal(parent, { animalId }, { prisma, request }, info) {
+    const operation = await prisma.exists.Animal({
+      id: animalId,
+      likedBy_some: {
+        id: request.user.id
+      }
+    }) ? 'disconnect' : 'connect';
 
     const userLikedAnimal = await prisma.mutation.updateAnimal({
       where: { id: animalId },
       data: {
         likedBy: {
-          connect: {
+          [operation]: {
             id: request.user.id
           }
         }
@@ -52,7 +53,8 @@ export default {
     });
     
     return {
-      success: !!userLikedAnimal
+      success: !!userLikedAnimal,
+      message: `Animal ${ operation === 'connect' ? 'favoritado' : 'desfavoritado' }`
     }
   }
 }
