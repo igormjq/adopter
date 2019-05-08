@@ -11,11 +11,14 @@ const seedDatabase = async () => {
   try {
     log(chalk.yellow('Creating User Roles...'));
     await createRoles();
-    console.log("OK");
+    log("OK ✅");
     log(chalk.yellow('Creating Users...'));
     await createUsers();
+    log("OK ✅");
     log(chalk.yellow('Creating Animals...'));
     await createAnimals();
+    log("OK ✅");
+    log(chalk.green('Finished seeding 🚀'))
   } catch(err) {
     throw new Error(err);
   }

@@ -1,5 +1,6 @@
 import prisma from '../../src/prisma';
 import faker from 'faker';
+import animalImages from './images/data';
 
 const locales = ['es', 'en_US', 'de', 'it', 'fr', 'en_IND', 'pt_BR', 'es_MX'];
 
@@ -28,13 +29,14 @@ export default async () => {
       castrated: getRandom(),
       vaccinated: getRandom(),
       name: faker.name.firstName(),
-      profileImg: faker.image.animals(),
       about: faker.lorem.paragraph()
     };
     
+    const profileImg = getRandom(animalImages[animalData.type]);
     await prisma.mutation.createAnimal({
       data: {
         ...animalData,
+        profileImg,
         owner: {
           connect: {
             id: ownerId
