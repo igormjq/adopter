@@ -1,7 +1,7 @@
 import prisma from '../../src/prisma';
 import faker from 'faker';
 
-const locales = ['es', 'en_US', 'de', 'it', 'ru', 'es_MX'];
+const locales = ['es', 'en_US', 'de', 'it', 'fr', 'en_IND', 'pt_BR', 'es_MX'];
 
 const getUsersIds = async () => {
   const users = await prisma.query.users(null, `{id}`);
