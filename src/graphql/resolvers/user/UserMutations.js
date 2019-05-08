@@ -56,23 +56,4 @@ export default {
   async deleteUser(parent, args, { prisma, request }, info) {
     return await prisma.mutation.deleteUser({ where: { id: request.user.id }}, info);
   },
-  async likeAnimal(parent, { animalId }, { prisma, request }, info) {
-    const userLikedAnimal = await prisma.mutation.updateAnimal({
-      where: { id: animalId },
-      data: {
-        likedBy: {
-          connect: {
-            id: request.user.id
-          }
-        }
-      }
-    });
-
-    console.log(userLikedAnimal);
-
-    console.log('Deu boa', !!userLikedAnimal);
-    return {
-      success: !!userLikedAnimal
-    }
-  }
 }

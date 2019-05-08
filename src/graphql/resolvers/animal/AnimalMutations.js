@@ -32,6 +32,27 @@ export default {
     if(!allowed) throw new Error('Apenas cadastrados pelo mesmo usuário podem ser excluidos');
 
     return prisma.mutation.deleteAnimal({ where: { id }});
-  }
+  },
+  async likeAnimal(parent, { animalId }, { prisma, request }, info) {
+    const test = await prisma.exists.Animal({ id: animalId, likedBy: {
+      connect: { id: request.id }
+    }});
 
+    console.log('ta e ai existe??', test);
+
+    const userLikedAnimal = await prisma.mutation.updateAnimal({
+      where: { id: animalId },
+      data: {
+        likedBy: {
+          connect: {
+            id: request.user.id
+          }
+        }
+      }
+    });
+    
+    return {
+      success: !!userLikedAnimal
+    }
+  }
 }
