@@ -70,6 +70,7 @@ type Animal {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -178,6 +179,11 @@ enum AnimalSize {
   SMALL
   MEDIUM
   LARGE
+}
+
+enum AnimalAgeGroup {
+  ADULT
+  PUPPY
 }
 
 enum UserRole {

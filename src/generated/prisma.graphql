@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed May 08 2019 17:12:45 GMT-0300 (GMT-03:00)
+# timestamp: Wed May 08 2019 21:47:34 GMT-0300 (GMT-03:00)
 
 type Address implements Node {
   id: ID!
@@ -1184,6 +1184,7 @@ type Animal implements Node {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean!
@@ -1194,6 +1195,11 @@ type Animal implements Node {
   requestedIn(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+enum AnimalAgeGroup {
+  ADULT
+  PUPPY
 }
 
 """A connection to a list of items."""
@@ -1213,6 +1219,7 @@ input AnimalCreateInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1246,6 +1253,7 @@ input AnimalCreateWithoutLikedByInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1263,6 +1271,7 @@ input AnimalCreateWithoutOwnerInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1280,6 +1289,7 @@ input AnimalCreateWithoutRequestedInInput {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1317,6 +1327,8 @@ enum AnimalOrderByInput {
   size_DESC
   gender_ASC
   gender_DESC
+  ageGroup_ASC
+  ageGroup_DESC
   castrated_ASC
   castrated_DESC
   vaccinated_ASC
@@ -1340,6 +1352,7 @@ type AnimalPreviousValues {
   type: AnimalType!
   size: AnimalSize!
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean!
@@ -1508,6 +1521,16 @@ input AnimalScalarWhereInput {
 
   """All values that are not contained in given list."""
   gender_not_in: [AnimalGender!]
+  ageGroup: AnimalAgeGroup
+
+  """All values that are not equal to given value."""
+  ageGroup_not: AnimalAgeGroup
+
+  """All values that are contained in given list."""
+  ageGroup_in: [AnimalAgeGroup!]
+
+  """All values that are not contained in given list."""
+  ageGroup_not_in: [AnimalAgeGroup!]
   castrated: Boolean
 
   """All values that are not equal to given value."""
@@ -1647,11 +1670,9 @@ input AnimalScalarWhereInput {
 }
 
 enum AnimalSize {
-  EXTRA_SMALL
   SMALL
   MEDIUM
   LARGE
-  EXTRA_LARGE
 }
 
 type AnimalSubscriptionPayload {
@@ -1702,6 +1723,7 @@ input AnimalUpdateInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1719,6 +1741,7 @@ input AnimalUpdateManyDataInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1732,6 +1755,7 @@ input AnimalUpdateManyMutationInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1781,6 +1805,7 @@ input AnimalUpdateWithoutLikedByDataInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1797,6 +1822,7 @@ input AnimalUpdateWithoutOwnerDataInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -1813,6 +1839,7 @@ input AnimalUpdateWithoutRequestedInDataInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
   available: Boolean
@@ -2009,6 +2036,16 @@ input AnimalWhereInput {
 
   """All values that are not contained in given list."""
   gender_not_in: [AnimalGender!]
+  ageGroup: AnimalAgeGroup
+
+  """All values that are not equal to given value."""
+  ageGroup_not: AnimalAgeGroup
+
+  """All values that are contained in given list."""
+  ageGroup_in: [AnimalAgeGroup!]
+
+  """All values that are not contained in given list."""
+  ageGroup_not_in: [AnimalAgeGroup!]
   castrated: Boolean
 
   """All values that are not equal to given value."""
