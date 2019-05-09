@@ -63,6 +63,7 @@ type AuthPayload {
   user: User!
 }
 
+# ANIMAL
 type Animal {
   id: ID!
   owner: User!
@@ -82,6 +83,7 @@ type Animal {
   requestedIn: [AdoptionRequest!]!
 }
 
+# ADOPTION PROCEDURE
 type AdoptionRequest {
   id: ID!
   animal: Animal!
@@ -89,13 +91,13 @@ type AdoptionRequest {
   accepted: Boolean!
 }
 
+# UTILS
 type SuccessRequest {
   success: Boolean
   message: String
 }
 
 # INPUTS
-
 input CreateUserInput {
   email: String!
   password: String!
