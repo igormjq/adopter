@@ -1,14 +1,14 @@
 # source: http://localhost:4466
-# timestamp: Tue May 07 2019 18:16:18 GMT-0300 (GMT-03:00)
+# timestamp: Wed May 08 2019 17:12:45 GMT-0300 (GMT-03:00)
 
 type Address implements Node {
   id: ID!
-  street: String!
-  number: String!
-  district: String!
+  street: String
+  number: String
+  district: String
   complement: String
-  uf: String!
-  city: String!
+  uf: String
+  city: String
   lat: String
   lng: String
 }
@@ -25,12 +25,12 @@ type AddressConnection {
 
 input AddressCreateInput {
   id: ID
-  street: String!
-  number: String!
-  district: String!
+  street: String
+  number: String
+  district: String
   complement: String
-  uf: String!
-  city: String!
+  uf: String
+  city: String
   lat: String
   lng: String
 }
@@ -72,12 +72,12 @@ enum AddressOrderByInput {
 
 type AddressPreviousValues {
   id: ID!
-  street: String!
-  number: String!
-  district: String!
+  street: String
+  number: String
+  district: String
   complement: String
-  uf: String!
-  city: String!
+  uf: String
+  city: String
   lat: String
   lng: String
 }
@@ -1189,6 +1189,7 @@ type Animal implements Node {
   available: Boolean!
   about: String!
   photos: String
+  address: Address!
   likedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   requestedIn(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
   createdAt: DateTime!
@@ -1218,6 +1219,7 @@ input AnimalCreateInput {
   about: String!
   photos: String
   owner: UserCreateOneWithoutAnimalsInput!
+  address: AddressCreateOneInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
@@ -1250,6 +1252,7 @@ input AnimalCreateWithoutLikedByInput {
   about: String!
   photos: String
   owner: UserCreateOneWithoutAnimalsInput!
+  address: AddressCreateOneInput!
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
 
@@ -1265,6 +1268,7 @@ input AnimalCreateWithoutOwnerInput {
   available: Boolean
   about: String!
   photos: String
+  address: AddressCreateOneInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
 }
@@ -1282,6 +1286,7 @@ input AnimalCreateWithoutRequestedInInput {
   about: String!
   photos: String
   owner: UserCreateOneWithoutAnimalsInput!
+  address: AddressCreateOneInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
 }
 
@@ -1703,6 +1708,7 @@ input AnimalUpdateInput {
   about: String
   photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
+  address: AddressUpdateOneRequiredInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
@@ -1781,6 +1787,7 @@ input AnimalUpdateWithoutLikedByDataInput {
   about: String
   photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
+  address: AddressUpdateOneRequiredInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
 
@@ -1795,6 +1802,7 @@ input AnimalUpdateWithoutOwnerDataInput {
   available: Boolean
   about: String
   photos: String
+  address: AddressUpdateOneRequiredInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
 }
@@ -1811,6 +1819,7 @@ input AnimalUpdateWithoutRequestedInDataInput {
   about: String
   photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
+  address: AddressUpdateOneRequiredInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
 }
 
@@ -2137,6 +2146,7 @@ input AnimalWhereInput {
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
   owner: UserWhereInput
+  address: AddressWhereInput
   likedBy_every: UserWhereInput
   likedBy_some: UserWhereInput
   likedBy_none: UserWhereInput

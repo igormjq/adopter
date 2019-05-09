@@ -10,7 +10,7 @@ type User {
   favoriteAnimals: [Animal!]! @relation(name: "UserToFavoriteAnimals")
   adoptionRequests: [AdoptionRequest!]! @relation(name: "UserToAdoptionRequest", onDelete: CASCADE)
   role: Role! @relation(name: "UserToRole")
-  address: Address!
+  address: Address! @relation(name: "UserToAddress")
   profileImg: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -18,12 +18,12 @@ type User {
 
 type Address {
   id: ID! @id
-  street: String!
-  number: String!
-  district: String!
+  street: String
+  number: String
+  district: String
   complement: String
-  uf: String!
-  city: String!
+  uf: String
+  city: String
   lat: String
   lng: String
 }
@@ -49,6 +49,7 @@ type Animal {
   available: Boolean! @default(value: true)
   about: String!
   photos: String
+  address: Address! @relation(name: "AnimalToAddress")
   likedBy: [User!]! @relation(name: "UserToFavoriteAnimals")
   requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
   createdAt: DateTime! @createdAt

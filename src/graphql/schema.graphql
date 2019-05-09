@@ -48,9 +48,9 @@ type Role {
 
 type Address {
   id: ID!
-  street: String!
-  number: String!
-  district: String!
+  street: String
+  number: String
+  district: String
   complement: String
   uf: String!
   city: String!
@@ -76,6 +76,7 @@ type Animal {
   about: String!
   profileImg: String
   photos: String
+  address: Address!
   likedBy: [User!]!
   requestedIn: [AdoptionRequest!]!
 }

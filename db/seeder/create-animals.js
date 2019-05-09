@@ -2,7 +2,7 @@ import prisma from '../../src/prisma';
 import faker from 'faker';
 import animalImages from './images/data';
 
-const locales = ['es', 'en_US', 'de', 'it', 'fr', 'en_IND', 'pt_BR', 'es_MX'];
+const locales = ['es', 'en_US', 'de', 'it', 'fr','en_GB','pt_BR', 'es_MX', 'nl'];
 
 const getUsersIds = async () => {
   const users = await prisma.query.users(null, `{id}`);
@@ -31,8 +31,10 @@ export default async () => {
       name: faker.name.firstName(),
       about: faker.lorem.paragraph()
     };
-    
     const profileImg = getRandom(animalImages[animalData.type]);
+    
+    faker.locale = 'pt_BR';
+
     await prisma.mutation.createAnimal({
       data: {
         ...animalData,
@@ -40,6 +42,12 @@ export default async () => {
         owner: {
           connect: {
             id: ownerId
+          }
+        },
+        address: {
+          create: {
+            city: faker.address.city(),
+            uf: faker.address.stateAbbr()
           }
         },
         likedBy: {
