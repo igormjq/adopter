@@ -2,22 +2,13 @@ import faker from 'faker';
 import prisma from '../../src/prisma';
 import animalImages from './images/data';
 import getAddresses from './helpers/getAddress';
+import getRandom from './helpers/getRandomValue';
+import getUsersIds from './helpers/getUsersIds';
 
 const locales = ['es', 'en_US', 'de', 'it', 'fr','en_GB','pt_BR', 'es_MX', 'nl'];
 
-const getUsersIds = async () => {
-  const users = await prisma.query.users(null, `{id}`);
-  
-  return users.map(user => user.id);
-};
-
-const getRandom = object => {
-  if(!object) return Math.random() > 0.5; // Boolean
-  return object[Math.floor(Math.random() * object.length)]; // Array
-}
-
 export default async () => {
-  const ids = await getUsersIds();
+  const ids = await getUsersIds(prisma);
   const addresses = await getAddresses();
   
   for(let i=0; i < 21; i++) {
