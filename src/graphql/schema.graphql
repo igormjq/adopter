@@ -7,7 +7,7 @@ directive @auth on FIELD_DEFINITION
 type Query {
   users: [User!]!
   user(id: ID!): User!
-  animals: [Animal!]!
+  animals(first: Int, skip: Int): [Animal!]!
   roles: [Role!]!
 }
 

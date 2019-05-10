@@ -1,5 +1,5 @@
 export default {
-  async animals(parent, args, { prisma }, info) {
-    return await prisma.query.animals(null, info);
+  async animals(parent, { first, skip }, { prisma }, info) {
+    return await prisma.query.animals({ first, skip }, info);
   }
 }
