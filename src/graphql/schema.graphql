@@ -8,6 +8,7 @@ type Query {
   users: [User!]!
   user(id: ID!): User!
   animals(first: Int, skip: Int): [Animal!]!
+  animal(id: ID!): Animal!
   roles: [Role!]!
 }
 
