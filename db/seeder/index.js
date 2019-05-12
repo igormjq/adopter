@@ -4,9 +4,24 @@ import createUsers from './create-users';
 import createAnimals from './create-animals';
 
 const log = console.log;
+const args = process.argv.includes('-t');
 
-const seedDatabase = async () => {
+const mapModelToSeeder = {
+  animals: async () => await createAnimals(),
+  users: async () => await createUsers(),
+  roles: async () => await createRoles()
+};
+
+const seedDatabase = async model => {
+
   log(chalk.green('Seeding database'));
+
+  if(model) {
+    log(chalk.yellow(`Creating ${model}...`));
+    mapModelToSeeder[model]();
+    log("OK ✅");
+    return;
+  };
 
   try {
     log(chalk.yellow('Creating User Roles...'));
@@ -25,4 +40,15 @@ const seedDatabase = async () => {
   
 };
 
-seedDatabase();
+if(args) {
+  const models = process.argv.splice(process.argv.indexOf('-t') + 1);
+  const keys = Reflect.ownKeys(mapModelToSeeder);
+
+  models.forEach(model => {
+    if(keys.includes(model)) {
+      seedDatabase(model);
+    }  
+  });
+} else {
+  seedDatabase();
+}
