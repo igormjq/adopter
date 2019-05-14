@@ -40,7 +40,7 @@ export default {
           }
         }
       }
-    }, `{ id name email role { name } }`);
+    });
 
     return {
       token: jwt.sign({ id: user.id }, process.env.JWT_SECRET),
