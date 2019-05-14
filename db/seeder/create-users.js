@@ -11,7 +11,7 @@ faker.locale ='pt_BR';
 
 export default async () => {
   const users = await prisma.query.users();
-  const isFirstSeed = users.length;
+  const isFirstSeed = users.length === 0;
 
   if(isFirstSeed) {
      await prisma.mutation.createUser({
