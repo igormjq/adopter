@@ -33,7 +33,7 @@ export default {
 
     return prisma.mutation.deleteAnimal({ where: { id }});
   },
-  async toggleFavoriteAnimal(parent, { animalId }, { prisma, request }, info) {
+  async toggleFavoriteAnimal(parent, { animalId }, { prisma, request }) {
     const operation = await prisma.exists.Animal({
       id: animalId,
       likedBy_some: {
@@ -54,6 +54,7 @@ export default {
     
     return {
       success: !!userLikedAnimal,
+      operation,
       message: `Animal ${ operation === 'connect' ? 'favoritado' : 'desfavoritado' }`
     }
   }

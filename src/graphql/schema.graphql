@@ -9,6 +9,7 @@ type Query {
   user(id: ID!): User!
   me: User! @auth
   animals(first: Int, skip: Int): [Animal!]!
+  animal(id: ID!) : Animal!
   roles: [Role!]!
 }
 
