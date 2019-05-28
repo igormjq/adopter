@@ -1,3 +1,5 @@
+import operationMap from '../../../utils/operationMap';
+
 const isSameUser = async (prisma, animalId, userId) => {
   return await prisma.exists.Animal({ id: animalId, owner: { id: userId }});
 }
@@ -54,7 +56,7 @@ export default {
     
     return {
       success: !!userLikedAnimal,
-      operation,
+      operation: operationMap.get('animals').toggleFavoriteAnimal[operation],
       message: `Animal ${ operation === 'connect' ? 'favoritado' : 'desfavoritado' }`
     }
   }

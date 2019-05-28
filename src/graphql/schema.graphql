@@ -96,6 +96,7 @@ type AdoptionRequest {
 # UTILS
 type SuccessRequest {
   success: Boolean
+  operation: String
   message: String
 }
 
