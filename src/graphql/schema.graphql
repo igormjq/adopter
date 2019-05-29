@@ -8,7 +8,7 @@ type Query {
   users: [User!]!
   user(id: ID!): User!
   me: User! @auth
-  animals(first: Int, skip: Int): [Animal!]!
+  animals(first: Int, skip: Int, where: AnimalWhereInput): [Animal!]!
   animal(id: ID!) : Animal!
   roles: [Role!]!
 }
@@ -150,6 +150,18 @@ input CreateAnimalInput {
   vaccinated: Boolean
   about: String!
   photos: PhotoInput
+}
+
+input AnimalWhereInput {
+  address: AddressWhereInput
+  type: AnimalType
+  size: AnimalSize
+  gender: AnimalGender
+}
+
+input AddressWhereInput {
+  city: String,
+  uf: String,
 }
 
 input PhotoInput {
