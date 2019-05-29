@@ -57,7 +57,7 @@ export default {
     return {
       success: !!userLikedAnimal,
       operation: operationMap.get('animals').toggleFavoriteAnimal[operation],
-      message: `Animal ${ operation === 'connect' ? 'favoritado' : 'desfavoritado' }`
+      message: `${ operation === 'connect' ? 'adicionado aos favoritos' : 'removido dos seus favoritos' }`
     }
   }
 }
