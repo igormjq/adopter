@@ -154,14 +154,14 @@ input CreateAnimalInput {
 
 input AnimalWhereInput {
   address: AddressWhereInput
-  type: AnimalType
-  size: AnimalSize
-  gender: AnimalGender
-  ageGroup: AnimalAgeGroup
+  type_in: [AnimalType]
+  size_in: [AnimalSize]
+  gender_in: [AnimalGender]
+  ageGroup_in: [AnimalAgeGroup]
 }
 
 input AddressWhereInput {
-  city: String,
+  city_contains: String,
   uf: String,
 }
 
