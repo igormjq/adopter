@@ -157,6 +157,7 @@ input AnimalWhereInput {
   type: AnimalType
   size: AnimalSize
   gender: AnimalGender
+  ageGroup: AnimalAgeGroup
 }
 
 input AddressWhereInput {
