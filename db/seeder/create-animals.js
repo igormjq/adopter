@@ -23,7 +23,7 @@ export default async () => {
       castrated: getRandom(),
       vaccinated: getRandom(),
       name: faker.name.firstName(),
-      about: faker.lorem.paragraph()
+      about: faker.lorem.paragraphs()
     };
     const profileImg = getRandom(animalImages[animalData.type]);
     
