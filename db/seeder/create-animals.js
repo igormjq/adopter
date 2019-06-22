@@ -22,6 +22,8 @@ export default async () => {
       ageGroup: getRandom(['ADULT', 'PUPPY']),
       castrated: getRandom(),
       vaccinated: getRandom(),
+      dewormed: getRandom(),
+      specialNeeds: getRandom(),
       name: faker.name.firstName(),
       about: faker.lorem.paragraphs()
     };

@@ -47,12 +47,15 @@ type Animal {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean! @default(value: true)
   about: String!
   photos: String
   address: Address! @relation(name: "AnimalToAddress")
   likedBy: [User!]! @relation(name: "UserToFavoriteAnimals")
   requestedIn: [AdoptionRequest!]! @relation(name: "AnimalToAdoptionRequest", onDelete: CASCADE)
+  comments: [Comment!]
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -73,29 +76,29 @@ type Adoption {
   updatedAt: DateTime! @updatedAt
 }
 
-type Event {
-  id: ID! @id
-  createdBy: User! @relation(name: "UserToEvent")
-  title: String!
-  description: String!
-  date: DateTime!
-  comments: [Comment!]!
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
+# type Event {
+#   id: ID! @id
+#   createdBy: User! @relation(name: "UserToEvent")
+#   title: String!
+#   description: String!
+#   date: DateTime!
+#   comments: [Comment!]!
+#   createdAt: DateTime! @createdAt
+#   updatedAt: DateTime! @updatedAt
+# }
 
-type Report {
-  id: ID! @id
-  author: User! @relation(name: "WrittenReports")
-  responsible: User! @relation(name: "IncomingReports")
-  type: ReportType!
-  title: String!
-  body: String!
-  published: Boolean! @default(value: false)
-  comments: [Comment!]!
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
+# type Report {
+#   id: ID! @id
+#   author: User! @relation(name: "WrittenReports")
+#   responsible: User! @relation(name: "IncomingReports")
+#   type: ReportType!
+#   title: String!
+#   body: String!
+#   published: Boolean! @default(value: false)
+#   comments: [Comment!]!
+#   createdAt: DateTime! @createdAt
+#   updatedAt: DateTime! @updatedAt
+# }
 
 type Comment {
   id: ID! @id

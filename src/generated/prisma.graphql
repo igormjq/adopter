@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed May 08 2019 21:47:34 GMT-0300 (GMT-03:00)
+# timestamp: Sat Jun 22 2019 15:00:07 GMT-0300 (GMT-03:00)
 
 type Address implements Node {
   id: ID!
@@ -1160,14 +1160,6 @@ type AggregateComment {
   count: Int!
 }
 
-type AggregateEvent {
-  count: Int!
-}
-
-type AggregateReport {
-  count: Int!
-}
-
 type AggregateRole {
   count: Int!
 }
@@ -1187,12 +1179,15 @@ type Animal implements Node {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean!
   about: String!
   photos: String
   address: Address!
   likedBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   requestedIn(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest!]
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1222,6 +1217,8 @@ input AnimalCreateInput {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String!
   photos: String
@@ -1229,6 +1226,7 @@ input AnimalCreateInput {
   address: AddressCreateOneInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
+  comments: CommentCreateManyInput
 }
 
 input AnimalCreateManyWithoutLikedByInput {
@@ -1256,12 +1254,15 @@ input AnimalCreateWithoutLikedByInput {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String!
   photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   address: AddressCreateOneInput!
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
+  comments: CommentCreateManyInput
 }
 
 input AnimalCreateWithoutOwnerInput {
@@ -1274,12 +1275,15 @@ input AnimalCreateWithoutOwnerInput {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String!
   photos: String
   address: AddressCreateOneInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestCreateManyWithoutAnimalInput
+  comments: CommentCreateManyInput
 }
 
 input AnimalCreateWithoutRequestedInInput {
@@ -1292,12 +1296,15 @@ input AnimalCreateWithoutRequestedInInput {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String!
   photos: String
   owner: UserCreateOneWithoutAnimalsInput!
   address: AddressCreateOneInput!
   likedBy: UserCreateManyWithoutFavoriteAnimalsInput
+  comments: CommentCreateManyInput
 }
 
 """An edge in a connection."""
@@ -1333,6 +1340,10 @@ enum AnimalOrderByInput {
   castrated_DESC
   vaccinated_ASC
   vaccinated_DESC
+  dewormed_ASC
+  dewormed_DESC
+  specialNeeds_ASC
+  specialNeeds_DESC
   available_ASC
   available_DESC
   about_ASC
@@ -1355,6 +1366,8 @@ type AnimalPreviousValues {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean!
   about: String!
   photos: String
@@ -1539,6 +1552,14 @@ input AnimalScalarWhereInput {
 
   """All values that are not equal to given value."""
   vaccinated_not: Boolean
+  dewormed: Boolean
+
+  """All values that are not equal to given value."""
+  dewormed_not: Boolean
+  specialNeeds: Boolean
+
+  """All values that are not equal to given value."""
+  specialNeeds_not: Boolean
   available: Boolean
 
   """All values that are not equal to given value."""
@@ -1726,6 +1747,8 @@ input AnimalUpdateInput {
   ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String
   photos: String
@@ -1733,6 +1756,7 @@ input AnimalUpdateInput {
   address: AddressUpdateOneRequiredInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
+  comments: CommentUpdateManyInput
 }
 
 input AnimalUpdateManyDataInput {
@@ -1744,6 +1768,8 @@ input AnimalUpdateManyDataInput {
   ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String
   photos: String
@@ -1758,6 +1784,8 @@ input AnimalUpdateManyMutationInput {
   ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String
   photos: String
@@ -1808,12 +1836,15 @@ input AnimalUpdateWithoutLikedByDataInput {
   ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String
   photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   address: AddressUpdateOneRequiredInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
+  comments: CommentUpdateManyInput
 }
 
 input AnimalUpdateWithoutOwnerDataInput {
@@ -1825,12 +1856,15 @@ input AnimalUpdateWithoutOwnerDataInput {
   ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String
   photos: String
   address: AddressUpdateOneRequiredInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
   requestedIn: AdoptionRequestUpdateManyWithoutAnimalInput
+  comments: CommentUpdateManyInput
 }
 
 input AnimalUpdateWithoutRequestedInDataInput {
@@ -1842,12 +1876,15 @@ input AnimalUpdateWithoutRequestedInDataInput {
   ageGroup: AnimalAgeGroup
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String
   photos: String
   owner: UserUpdateOneRequiredWithoutAnimalsInput
   address: AddressUpdateOneRequiredInput
   likedBy: UserUpdateManyWithoutFavoriteAnimalsInput
+  comments: CommentUpdateManyInput
 }
 
 input AnimalUpdateWithWhereUniqueWithoutLikedByInput {
@@ -2054,6 +2091,14 @@ input AnimalWhereInput {
 
   """All values that are not equal to given value."""
   vaccinated_not: Boolean
+  dewormed: Boolean
+
+  """All values that are not equal to given value."""
+  dewormed_not: Boolean
+  specialNeeds: Boolean
+
+  """All values that are not equal to given value."""
+  specialNeeds_not: Boolean
   available: Boolean
 
   """All values that are not equal to given value."""
@@ -2190,6 +2235,9 @@ input AnimalWhereInput {
   requestedIn_every: AdoptionRequestWhereInput
   requestedIn_some: AdoptionRequestWhereInput
   requestedIn_none: AdoptionRequestWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
 }
 
 input AnimalWhereUniqueInput {
@@ -2617,325 +2665,6 @@ input CommentWhereUniqueInput {
 
 scalar DateTime
 
-type Event implements Node {
-  id: ID!
-  createdBy: User!
-  title: String!
-  description: String!
-  date: DateTime!
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-"""A connection to a list of items."""
-type EventConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [EventEdge]!
-  aggregate: AggregateEvent!
-}
-
-input EventCreateInput {
-  id: ID
-  title: String!
-  description: String!
-  date: DateTime!
-  createdBy: UserCreateOneInput!
-  comments: CommentCreateManyInput
-}
-
-"""An edge in a connection."""
-type EventEdge {
-  """The item at the end of the edge."""
-  node: Event!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum EventOrderByInput {
-  id_ASC
-  id_DESC
-  title_ASC
-  title_DESC
-  description_ASC
-  description_DESC
-  date_ASC
-  date_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type EventPreviousValues {
-  id: ID!
-  title: String!
-  description: String!
-  date: DateTime!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type EventSubscriptionPayload {
-  mutation: MutationType!
-  node: Event
-  updatedFields: [String!]
-  previousValues: EventPreviousValues
-}
-
-input EventSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [EventSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [EventSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [EventSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: EventWhereInput
-}
-
-input EventUpdateInput {
-  title: String
-  description: String
-  date: DateTime
-  createdBy: UserUpdateOneRequiredInput
-  comments: CommentUpdateManyInput
-}
-
-input EventUpdateManyMutationInput {
-  title: String
-  description: String
-  date: DateTime
-}
-
-input EventWhereInput {
-  """Logical AND on all given filters."""
-  AND: [EventWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [EventWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [EventWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  description: String
-
-  """All values that are not equal to given value."""
-  description_not: String
-
-  """All values that are contained in given list."""
-  description_in: [String!]
-
-  """All values that are not contained in given list."""
-  description_not_in: [String!]
-
-  """All values less than the given value."""
-  description_lt: String
-
-  """All values less than or equal the given value."""
-  description_lte: String
-
-  """All values greater than the given value."""
-  description_gt: String
-
-  """All values greater than or equal the given value."""
-  description_gte: String
-
-  """All values containing the given string."""
-  description_contains: String
-
-  """All values not containing the given string."""
-  description_not_contains: String
-
-  """All values starting with the given string."""
-  description_starts_with: String
-
-  """All values not starting with the given string."""
-  description_not_starts_with: String
-
-  """All values ending with the given string."""
-  description_ends_with: String
-
-  """All values not ending with the given string."""
-  description_not_ends_with: String
-  date: DateTime
-
-  """All values that are not equal to given value."""
-  date_not: DateTime
-
-  """All values that are contained in given list."""
-  date_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  date_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  date_lt: DateTime
-
-  """All values less than or equal the given value."""
-  date_lte: DateTime
-
-  """All values greater than the given value."""
-  date_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  date_gte: DateTime
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  createdBy: UserWhereInput
-  comments_every: CommentWhereInput
-  comments_some: CommentWhereInput
-  comments_none: CommentWhereInput
-}
-
-input EventWhereUniqueInput {
-  id: ID
-}
-
 """Raw JSON value"""
 scalar Json
 
@@ -2948,55 +2677,43 @@ scalar Long
 type Mutation {
   createAnimal(data: AnimalCreateInput!): Animal!
   createAdoption(data: AdoptionCreateInput!): Adoption!
-  createEvent(data: EventCreateInput!): Event!
-  createReport(data: ReportCreateInput!): Report!
-  createComment(data: CommentCreateInput!): Comment!
-  createAdoptionRequest(data: AdoptionRequestCreateInput!): AdoptionRequest!
   createUser(data: UserCreateInput!): User!
+  createAdoptionRequest(data: AdoptionRequestCreateInput!): AdoptionRequest!
+  createComment(data: CommentCreateInput!): Comment!
   createAddress(data: AddressCreateInput!): Address!
   createRole(data: RoleCreateInput!): Role!
   updateAnimal(data: AnimalUpdateInput!, where: AnimalWhereUniqueInput!): Animal
   updateAdoption(data: AdoptionUpdateInput!, where: AdoptionWhereUniqueInput!): Adoption
-  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
-  updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
-  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
-  updateAdoptionRequest(data: AdoptionRequestUpdateInput!, where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateAdoptionRequest(data: AdoptionRequestUpdateInput!, where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
   updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
   updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
   deleteAnimal(where: AnimalWhereUniqueInput!): Animal
   deleteAdoption(where: AdoptionWhereUniqueInput!): Adoption
-  deleteEvent(where: EventWhereUniqueInput!): Event
-  deleteReport(where: ReportWhereUniqueInput!): Report
-  deleteComment(where: CommentWhereUniqueInput!): Comment
-  deleteAdoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteAdoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
+  deleteComment(where: CommentWhereUniqueInput!): Comment
   deleteAddress(where: AddressWhereUniqueInput!): Address
   deleteRole(where: RoleWhereUniqueInput!): Role
   upsertAnimal(where: AnimalWhereUniqueInput!, create: AnimalCreateInput!, update: AnimalUpdateInput!): Animal!
   upsertAdoption(where: AdoptionWhereUniqueInput!, create: AdoptionCreateInput!, update: AdoptionUpdateInput!): Adoption!
-  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
-  upsertReport(where: ReportWhereUniqueInput!, create: ReportCreateInput!, update: ReportUpdateInput!): Report!
-  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
-  upsertAdoptionRequest(where: AdoptionRequestWhereUniqueInput!, create: AdoptionRequestCreateInput!, update: AdoptionRequestUpdateInput!): AdoptionRequest!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertAdoptionRequest(where: AdoptionRequestWhereUniqueInput!, create: AdoptionRequestCreateInput!, update: AdoptionRequestUpdateInput!): AdoptionRequest!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
   upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
   upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
   updateManyAnimals(data: AnimalUpdateManyMutationInput!, where: AnimalWhereInput): BatchPayload!
-  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
-  updateManyReports(data: ReportUpdateManyMutationInput!, where: ReportWhereInput): BatchPayload!
-  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
-  updateManyAdoptionRequests(data: AdoptionRequestUpdateManyMutationInput!, where: AdoptionRequestWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyAdoptionRequests(data: AdoptionRequestUpdateManyMutationInput!, where: AdoptionRequestWhereInput): BatchPayload!
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
   updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
   updateManyRoles(data: RoleUpdateManyMutationInput!, where: RoleWhereInput): BatchPayload!
   deleteManyAnimals(where: AnimalWhereInput): BatchPayload!
   deleteManyAdoptions(where: AdoptionWhereInput): BatchPayload!
-  deleteManyEvents(where: EventWhereInput): BatchPayload!
-  deleteManyReports(where: ReportWhereInput): BatchPayload!
-  deleteManyComments(where: CommentWhereInput): BatchPayload!
-  deleteManyAdoptionRequests(where: AdoptionRequestWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyAdoptionRequests(where: AdoptionRequestWhereInput): BatchPayload!
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
   deleteManyAddresses(where: AddressWhereInput): BatchPayload!
   deleteManyRoles(where: RoleWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
@@ -3036,29 +2753,23 @@ enum PrismaDatabase {
 type Query {
   animals(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Animal]!
   adoptions(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adoption]!
-  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
-  reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
-  adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  adoptionRequests(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AdoptionRequest]!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
   roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
   animal(where: AnimalWhereUniqueInput!): Animal
   adoption(where: AdoptionWhereUniqueInput!): Adoption
-  event(where: EventWhereUniqueInput!): Event
-  report(where: ReportWhereUniqueInput!): Report
-  comment(where: CommentWhereUniqueInput!): Comment
-  adoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
   user(where: UserWhereUniqueInput!): User
+  adoptionRequest(where: AdoptionRequestWhereUniqueInput!): AdoptionRequest
+  comment(where: CommentWhereUniqueInput!): Comment
   address(where: AddressWhereUniqueInput!): Address
   role(where: RoleWhereUniqueInput!): Role
   animalsConnection(where: AnimalWhereInput, orderBy: AnimalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnimalConnection!
   adoptionsConnection(where: AdoptionWhereInput, orderBy: AdoptionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionConnection!
-  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
-  reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
-  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
-  adoptionRequestsConnection(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionRequestConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  adoptionRequestsConnection(where: AdoptionRequestWhereInput, orderBy: AdoptionRequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdoptionRequestConnection!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
   rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
 
@@ -3067,334 +2778,6 @@ type Query {
     """The ID of an object"""
     id: ID!
   ): Node
-}
-
-type Report implements Node {
-  id: ID!
-  author: User!
-  responsible: User!
-  type: ReportType!
-  title: String!
-  body: String!
-  published: Boolean!
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-"""A connection to a list of items."""
-type ReportConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [ReportEdge]!
-  aggregate: AggregateReport!
-}
-
-input ReportCreateInput {
-  id: ID
-  type: ReportType!
-  title: String!
-  body: String!
-  published: Boolean
-  author: UserCreateOneInput!
-  responsible: UserCreateOneInput!
-  comments: CommentCreateManyInput
-}
-
-"""An edge in a connection."""
-type ReportEdge {
-  """The item at the end of the edge."""
-  node: Report!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum ReportOrderByInput {
-  id_ASC
-  id_DESC
-  type_ASC
-  type_DESC
-  title_ASC
-  title_DESC
-  body_ASC
-  body_DESC
-  published_ASC
-  published_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type ReportPreviousValues {
-  id: ID!
-  type: ReportType!
-  title: String!
-  body: String!
-  published: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type ReportSubscriptionPayload {
-  mutation: MutationType!
-  node: Report
-  updatedFields: [String!]
-  previousValues: ReportPreviousValues
-}
-
-input ReportSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ReportSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ReportSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ReportSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: ReportWhereInput
-}
-
-enum ReportType {
-  GENERAL
-  ABUSE
-  HELP
-}
-
-input ReportUpdateInput {
-  type: ReportType
-  title: String
-  body: String
-  published: Boolean
-  author: UserUpdateOneRequiredInput
-  responsible: UserUpdateOneRequiredInput
-  comments: CommentUpdateManyInput
-}
-
-input ReportUpdateManyMutationInput {
-  type: ReportType
-  title: String
-  body: String
-  published: Boolean
-}
-
-input ReportWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ReportWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ReportWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ReportWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  type: ReportType
-
-  """All values that are not equal to given value."""
-  type_not: ReportType
-
-  """All values that are contained in given list."""
-  type_in: [ReportType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ReportType!]
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  body: String
-
-  """All values that are not equal to given value."""
-  body_not: String
-
-  """All values that are contained in given list."""
-  body_in: [String!]
-
-  """All values that are not contained in given list."""
-  body_not_in: [String!]
-
-  """All values less than the given value."""
-  body_lt: String
-
-  """All values less than or equal the given value."""
-  body_lte: String
-
-  """All values greater than the given value."""
-  body_gt: String
-
-  """All values greater than or equal the given value."""
-  body_gte: String
-
-  """All values containing the given string."""
-  body_contains: String
-
-  """All values not containing the given string."""
-  body_not_contains: String
-
-  """All values starting with the given string."""
-  body_starts_with: String
-
-  """All values not starting with the given string."""
-  body_not_starts_with: String
-
-  """All values ending with the given string."""
-  body_ends_with: String
-
-  """All values not ending with the given string."""
-  body_not_ends_with: String
-  published: Boolean
-
-  """All values that are not equal to given value."""
-  published_not: Boolean
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  author: UserWhereInput
-  responsible: UserWhereInput
-  comments_every: CommentWhereInput
-  comments_some: CommentWhereInput
-  comments_none: CommentWhereInput
-}
-
-input ReportWhereUniqueInput {
-  id: ID
 }
 
 type Role implements Node {
@@ -3703,11 +3086,9 @@ input RoleWhereUniqueInput {
 type Subscription {
   animal(where: AnimalSubscriptionWhereInput): AnimalSubscriptionPayload
   adoption(where: AdoptionSubscriptionWhereInput): AdoptionSubscriptionPayload
-  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
-  report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
-  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
-  adoptionRequest(where: AdoptionRequestSubscriptionWhereInput): AdoptionRequestSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  adoptionRequest(where: AdoptionRequestSubscriptionWhereInput): AdoptionRequestSubscriptionPayload
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
   role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
 }

@@ -76,12 +76,15 @@ type Animal {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   available: Boolean
   about: String!
   profileImg: String
   photos: String
   address: Address!
   likedBy: [User!]!
+  comments: [Comment]
   requestedIn: [AdoptionRequest!]!
 }
 
@@ -180,6 +183,13 @@ input UpdateAnimalInput {
   castrated: Boolean
   vaccinated: Boolean
   about: String
+}
+
+type Comment {
+  id: ID!
+  author: User!
+  text: String!
+  createdAt: String!
 }
 
 # ENUM
