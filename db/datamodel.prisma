@@ -127,6 +127,7 @@ enum AnimalSize {
 enum AnimalAgeGroup {
   ADULT
   PUPPY
+  ELDERLY
 }
 
 enum ReportType {

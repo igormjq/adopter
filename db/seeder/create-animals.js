@@ -19,7 +19,7 @@ export default async () => {
       type: getRandom(['DOG', 'CAT']),
       size: getRandom(['SMALL', 'MEDIUM', 'LARGE']),
       gender: getRandom(['MALE', 'FEMALE']),
-      ageGroup: getRandom(['ADULT', 'PUPPY']),
+      ageGroup: getRandom(['ADULT', 'ELDERLY', 'PUPPY']),
       castrated: getRandom(),
       vaccinated: getRandom(),
       dewormed: getRandom(),
