@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import createRoles from './create-roles';
 import createUsers from './create-users';
 import createAnimals from './create-animals';
+import createAdoptionRequests from './create-adoption-requests';
 
 const log = console.log;
 const args = process.argv.includes('-t');
@@ -9,7 +10,8 @@ const args = process.argv.includes('-t');
 const mapModelToSeeder = {
   animals: async () => await createAnimals(),
   users: async () => await createUsers(),
-  roles: async () => await createRoles()
+  roles: async () => await createRoles(),
+  adoptionRequests: async () => await createAdoptionRequests(),
 };
 
 const seedDatabase = async model => {
@@ -32,6 +34,9 @@ const seedDatabase = async model => {
     log("OK ✅");
     log(chalk.yellow('Creating Animals...'));
     await createAnimals();
+    log("OK ✅");
+    log(chalk.yellow('Creating Adoption Requests...'));
+    await createAdoptionRequests();
     log("OK ✅");
     log(chalk.green('Finished seeding 🚀'))
   } catch(err) {
