@@ -11,6 +11,7 @@ type Query {
   animals(first: Int, skip: Int, where: AnimalWhereInput): [Animal!]!
   animal(id: ID!) : Animal!
   roles: [Role!]!
+  adoptionRequests: [AdoptionRequest!]!
 }
 
 type Mutation {
@@ -23,6 +24,7 @@ type Mutation {
   updateAnimal(id: ID!, data: UpdateAnimalInput!): Animal! @auth
   deleteAnimal(id: ID!): Animal! @auth
   toggleFavoriteAnimal(animalId: ID!): SuccessRequest! @auth
+  createAdoptionRequest(animalId: ID!, sentBy: ID!): AdoptionRequest! @auth
 }
 
 # USER
