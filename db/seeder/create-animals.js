@@ -3,12 +3,12 @@ import prisma from '../../src/prisma';
 import animalImages from './images/data';
 import getAddresses from './helpers/getAddress';
 import getRandom from './helpers/getRandomValue';
-import getUsersIds from './helpers/getUsersIds';
+import getUsersIds from './helpers/getModelIds';
 
 const locales = ['es', 'en_US', 'de', 'it', 'fr','en_GB','pt_BR', 'es_MX', 'nl'];
 
 export default async () => {
-  const ids = await getUsersIds(prisma);
+  const ids = await getUsersIds(prisma, 'users');
   const addresses = await getAddresses();
   
   for(let i=0; i < 21; i++) {
