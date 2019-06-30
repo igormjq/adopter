@@ -14,6 +14,11 @@ export default {
           connect: {
             id: request.user.id
           }
+        },
+        address: {
+          create: {
+            ...data.address
+          }
         }
       }
     }, info);

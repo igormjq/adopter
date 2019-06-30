@@ -128,9 +128,9 @@ input UpdateUserInput {
 }
 
 input AddressInput {
-  street: String!
-  number: String!
-  district: String!
+  street: String
+  number: String
+  district: String
   complement: String
   uf: String!
   city: String!
@@ -150,11 +150,13 @@ input CreateAnimalInput {
   name: String!
   type: AnimalType!
   size: AnimalSize!
-  gender: AnimalGender
+  gender: AnimalGender!
+  ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
   about: String!
-  photos: PhotoInput
+  address: AddressInput!
+  photos: [String!]
 }
 
 input AnimalWhereInput {
@@ -168,10 +170,6 @@ input AnimalWhereInput {
 input AddressWhereInput {
   city_contains: String,
   uf: String,
-}
-
-input PhotoInput {
-  data: [String]
 }
 
 type Photo {
