@@ -9,5 +9,20 @@ export default {
   },
   Animal: {
     photos: async (parent, args, { prisma }, info) => JSON.parse(parent.photos)
+  },
+  User: {
+    receivedAdoptionRequests: async (parent, args, { prisma }, info) => {
+      const query = await prisma.query.adoptionRequests({
+        where: {
+          animal: {
+            owner: {
+              id: parent.id
+            }
+          }
+        }
+      }, info);
+
+      return query;
+    }
   }
 }
