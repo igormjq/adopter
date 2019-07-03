@@ -6,5 +6,8 @@ export default {
   Mutation,
   AuthPayload: {
     user: async ({ user: { id }}, args, { prisma }, info) => prisma.query.user({ where: { id }}, info) 
+  },
+  Animal: {
+    photos: async (parent, args, { prisma }, info) => JSON.parse(parent.photos)
   }
 }
