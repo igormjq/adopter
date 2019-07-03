@@ -97,6 +97,7 @@ type AdoptionRequest {
   animal: Animal!
   sentBy: User!
   accepted: Boolean!
+  createdAt: String!
 }
 
 # UTILS

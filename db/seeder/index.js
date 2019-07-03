@@ -35,8 +35,8 @@ const seedDatabase = async model => {
     log(chalk.yellow('Creating Animals...'));
     await createAnimals();
     log("OK ✅");
-    log(chalk.yellow('Creating Adoption Requests...'));
-    await createAdoptionRequests();
+    // log(chalk.yellow('Creating Adoption Requests...'));
+    // await createAdoptionRequests();
     log("OK ✅");
     log(chalk.green('Finished seeding 🚀'))
   } catch(err) {

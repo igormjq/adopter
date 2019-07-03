@@ -12,11 +12,12 @@ export default {
   },
   User: {
     receivedAdoptionRequests: async (parent, args, { prisma }, info) => {
+      const targetUser = parent.id;
       const query = await prisma.query.adoptionRequests({
         where: {
           animal: {
             owner: {
-              id: parent.id
+              id: targetUser
             }
           }
         }
