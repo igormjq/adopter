@@ -154,8 +154,11 @@ input CreateAnimalInput {
   ageGroup: AnimalAgeGroup!
   castrated: Boolean
   vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
   about: String!
   address: AddressInput!
+  profileImg: String
   photos: [String!]
 }
 

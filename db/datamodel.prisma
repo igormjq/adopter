@@ -45,10 +45,10 @@ type Animal {
   size: AnimalSize!
   gender: AnimalGender
   ageGroup: AnimalAgeGroup!
-  castrated: Boolean
-  vaccinated: Boolean
-  dewormed: Boolean
-  specialNeeds: Boolean
+  castrated: Boolean @default(value: false)
+  vaccinated: Boolean @default(value: false)
+  dewormed: Boolean @default(value: false)
+  specialNeeds: Boolean @default(value: false)
   available: Boolean! @default(value: true)
   about: String!
   photos: String
