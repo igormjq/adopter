@@ -26,6 +26,7 @@ type Mutation {
   toggleFavoriteAnimal(animalId: ID!): SuccessRequest! @auth
   createAdoptionRequest(animalId: ID!): AdoptionRequest! @auth
   acceptAdoptionRequest(id: ID!): AdoptionRequest! @auth
+  commentOnAnimal(animalId: ID!, text: String!): Animal! @auth
 }
 
 # USER
@@ -147,6 +148,10 @@ input LoginInput {
 input CreateRoleInput {
   name: String!
   displayName: String!
+}
+
+input CreateCommentInput {
+  text: ID!
 }
 
 input CreateAnimalInput {

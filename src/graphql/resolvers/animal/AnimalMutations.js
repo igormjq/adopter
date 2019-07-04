@@ -64,5 +64,22 @@ export default {
       operation: operationMap.get('animals').toggleFavoriteAnimal[operation],
       message: `${ operation === 'connect' ? 'adicionado aos favoritos' : 'removido dos seus favoritos' }`
     }
+  },
+  async commentOnAnimal(parent, { animalId, text }, { prisma, request }, info) {
+    return prisma.mutation.updateAnimal({
+      where: { id: animalId },
+      data: {
+        comments: {
+          create: {
+            text,
+            author: {
+              connect: {
+                id: request.user.id
+              }
+            }
+          }
+        }
+      },
+    }, info);
   }
 }

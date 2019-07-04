@@ -7,8 +7,9 @@
     "start": "node dist/www/index.js",
     "heroku-postbuild": "babel src --out-dir dist --copy-files",
     "dev": "env-cmd -f ./config/dev.env nodemon src/www/index.js --ext js,graphql --exec babel-node",
-    "get-schema": "graphql get-schema -p prisma",
-    "db:seed": "env-cmd -f ./config/dev.env babel-node ./db/seeder/index.js"
+    "get-schema": "env-cmd -f ./config/dev.env graphql get-schema -p prisma",
+    "db:seed": "env-cmd -f ./config/dev.env babel-node ./db/seeder/index.js",
+    "db:seed:prod": "env-cmd -f ./config/prod.env babel-node ./db/seeder/index.js"
   },
   "keywords": [],
   "author": "",
