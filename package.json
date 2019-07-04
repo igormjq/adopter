@@ -1,0 +1,41 @@
+{
+  "name": "adopter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/www/index.js",
+    "heroku-postbuild": "babel src --out-dir dist --copy-files",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/www/index.js --ext js,graphql --exec babel-node",
+    "get-schema": "graphql get-schema -p prisma",
+    "db:seed": "env-cmd -f ./config/dev.env babel-node ./db/seeder/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.2",
+    "core-js": "^3.1.4",
+    "env-cmd": "^9.0.3",
+    "graphql": "^14.2.1",
+    "graphql-cli": "^3.0.11",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.4",
+    "jsonwebtoken": "^8.5.1",
+    "prisma-binding": "^2.3.10",
+    "prisma-cli": "^1.0.9",
+    "universal-dotenv": "^1.11.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "faker": "^4.1.0",
+    "nodemon": "^1.18.11"
+  }
+}

@@ -1,0 +1,227 @@
+directive @hasRole(
+  role: String
+) on OBJECT | FIELD_DEFINITION
+
+directive @auth on FIELD_DEFINITION
+
+type Query {
+  users: [User!]!
+  user(id: ID!): User!
+  me: User! @auth
+  animals(first: Int, skip: Int, where: AnimalWhereInput): [Animal!]!
+  animal(id: ID!) : Animal!
+  roles: [Role!]!
+  adoptionRequests: [AdoptionRequest!]!
+}
+
+type Mutation {
+  login(data: LoginInput): AuthPayload!
+  createUser(data: CreateUserInput!): AuthPayload!
+  updateUser(data: UpdateUserInput!): User! @auth
+  deleteUser: User! @auth
+  createRole(data: CreateRoleInput!): Role! @hasRole(role: "ADMIN")
+  createAnimal(data: CreateAnimalInput!): Animal! @auth
+  updateAnimal(id: ID!, data: UpdateAnimalInput!): Animal! @auth
+  deleteAnimal(id: ID!): Animal! @auth
+  toggleFavoriteAnimal(animalId: ID!): SuccessRequest! @auth
+  createAdoptionRequest(animalId: ID!): AdoptionRequest! @auth
+  acceptAdoptionRequest(id: ID!): AdoptionRequest! @auth
+}
+
+# USER
+type User {
+  id: ID!
+  email: String!
+  password: String
+  name: String!
+  profileImg: String
+  cpf: String
+  cnpj: String
+  phone: String!
+  address: Address!
+  animals: [Animal!]!
+  favoriteAnimals: [Animal!]!
+  adoptionRequests: [AdoptionRequest!]
+  receivedAdoptionRequests: [AdoptionRequest!]
+  role: Role!
+}
+
+type Role {
+  id: ID!
+  name: String!
+  displayName: String!
+}
+
+type Address {
+  id: ID!
+  street: String
+  number: String
+  district: String
+  complement: String
+  uf: String!
+  city: String!
+  lat: String
+  lng: String
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+# ANIMAL
+type Animal {
+  id: ID!
+  owner: User!
+  name: String!
+  type: AnimalType!
+  size: AnimalSize!
+  gender: AnimalGender
+  ageGroup: AnimalAgeGroup!
+  castrated: Boolean
+  vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
+  available: Boolean
+  about: String!
+  profileImg: String
+  photos: [String]
+  address: Address!
+  likedBy: [User!]!
+  comments: [Comment]
+  requestedIn: [AdoptionRequest!]!
+}
+
+# ADOPTION PROCEDURE
+type AdoptionRequest {
+  id: ID!
+  animal: Animal!
+  sentBy: User!
+  accepted: Boolean!
+  createdAt: String!
+}
+
+# UTILS
+type SuccessRequest {
+  success: Boolean
+  operation: String
+  message: String
+}
+
+# INPUTS
+input CreateUserInput {
+  email: String!
+  password: String!
+  name: String!
+  cpf: String
+  cnpj: String
+  phone: String
+  address: AddressInput
+  role: UserRole!
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  name: String
+  cpf: String
+  cnpj: String
+  phone: String
+  address: String
+}
+
+input AddressInput {
+  street: String
+  number: String
+  district: String
+  complement: String
+  uf: String!
+  city: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateRoleInput {
+  name: String!
+  displayName: String!
+}
+
+input CreateAnimalInput {
+  name: String!
+  type: AnimalType!
+  size: AnimalSize!
+  gender: AnimalGender!
+  ageGroup: AnimalAgeGroup!
+  castrated: Boolean
+  vaccinated: Boolean
+  dewormed: Boolean
+  specialNeeds: Boolean
+  about: String!
+  address: AddressInput!
+  profileImg: String
+  photos: [String!]
+}
+
+input AnimalWhereInput {
+  address: AddressWhereInput
+  type_in: [AnimalType]
+  size_in: [AnimalSize]
+  gender_in: [AnimalGender]
+  ageGroup_in: [AnimalAgeGroup]
+}
+
+input AddressWhereInput {
+  city_contains: String,
+  uf: String,
+}
+
+type Photo {
+  data: [String]
+}
+
+input UpdateAnimalInput {
+  name: String
+  size: AnimalSize
+  gender: AnimalGender
+  castrated: Boolean
+  vaccinated: Boolean
+  about: String
+}
+
+type Comment {
+  id: ID!
+  author: User!
+  text: String!
+  createdAt: String!
+}
+
+# ENUM
+enum AnimalType { 
+  DOG
+  CAT
+}
+
+enum AnimalGender {
+  MALE
+  FEMALE
+}
+
+enum AnimalSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum AnimalAgeGroup {
+  ADULT
+  PUPPY
+  ELDERLY
+}
+
+enum UserRole {
+  PERSON,
+  INSTITUTION
+}
