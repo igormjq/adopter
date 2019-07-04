@@ -25,5 +25,24 @@ export default {
         }
       }
     }, info);
-  }
+  },
+  async acceptAdoptionRequest(parent, { id }, { prisma, request }, info) {
+    const checkUser = await prisma.exists.AdoptionRequest({
+      id,
+      animal: {
+        owner: {
+          id: request.user.id
+        }
+      }
+    });
+
+    if(!checkUser) throw new Error('Pedido não pertence ao usuário');
+
+    return await prisma.mutation.updateAdoptionRequest({
+      where: { id },
+      data: {
+        accepted: true,
+      }
+    }, info);
+  },
 };

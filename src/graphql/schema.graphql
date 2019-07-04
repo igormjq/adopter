@@ -25,6 +25,7 @@ type Mutation {
   deleteAnimal(id: ID!): Animal! @auth
   toggleFavoriteAnimal(animalId: ID!): SuccessRequest! @auth
   createAdoptionRequest(animalId: ID!): AdoptionRequest! @auth
+  acceptAdoptionRequest(id: ID!): AdoptionRequest! @auth
 }
 
 # USER
