@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f ./config/prod.env node dist/www/index.js",
+    "start": "node dist/www/index.js",
     "heroku-postbuild": "babel src --out-dir dist --copy-files",
     "dev": "env-cmd -f ./config/dev.env nodemon src/www/index.js --ext js,graphql --exec babel-node",
     "get-schema": "graphql get-schema -p prisma",
