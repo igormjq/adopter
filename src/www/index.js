@@ -1,4 +1,8 @@
 import 'universal-dotenv'
 import app from '../app';
 
-app.start(() => console.log(`Server running on port 4000 🚀`));
+const port = process.env.PORT || 4000;
+
+app.start({ 
+  port 
+},() => console.log(`Server running on port ${port} 🚀`));

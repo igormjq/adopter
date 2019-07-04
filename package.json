@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/www/index.js --ext js,graphql --exec babel-node",
+    "start": "",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/www/index.js --ext js,graphql --exec babel-node",
     "get-schema": "graphql get-schema -p prisma",
-    "db:seed": "babel-node ./db/seeder/index.js"
+    "db:seed": "env-cmd -f ./config/dev.env babel-node ./db/seeder/index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.2",
+    "env-cmd": "^9.0.3",
     "graphql": "^14.2.1",
     "graphql-cli": "^3.0.11",
     "graphql-tools": "^4.0.4",
