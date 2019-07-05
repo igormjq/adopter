@@ -26,7 +26,10 @@ export default {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbMh3AxexcmkGSdgQsrno3dRMGHJP1VHYNaJuhm4EvEzru3ja",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTefDXhwWqqlvl029SYmFmyKisHrr6dxS3b9XdXgwbWMbNFOWT9",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGL84e9gpzny1d2ramUdaaDJ5uv5oHcHg6dsuRsCIcsZ40EIzX",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1p6abiqpfFEcxbAiRpD3EVpTUF7GEmdjFEVH2-D7j6Ybrc2bf"
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1p6abiqpfFEcxbAiRpD3EVpTUF7GEmdjFEVH2-D7j6Ybrc2bf",
+    "https://www.petmd.com/sites/default/files/4_1.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMTlikvkJV3FT4FDxJ64sSBURrDwHX0wHL60Jum0unpF0Dvw0T",
+    ""
   ],
   CAT: [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBoXrF6l_8tuU3Qo2sDO4oxi1xYGJMvCaREpvaxZxuPOFxhQbRMA",
@@ -52,6 +55,7 @@ export default {
     "http://www.petvale.com.br/imagens/10208_srd-vira-lata_perdido_piracicaba-sp.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR382p0f4SCpNHCzHRk9wQzLRixJVqEsDizmfiN4_iriTGUoyWX",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8uNJzG-vW4osjtJLPaxrkbPFBNjH5FcLnzVRSiG0lXtuPx-i3",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDg-XzbKlTaAeEs5UgZqf6Hpr1_JVCWZd4KalquehdNPGYYvl1"
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDg-XzbKlTaAeEs5UgZqf6Hpr1_JVCWZd4KalquehdNPGYYvl1",
+    "https://2.bp.blogspot.com/-tOkFdwF-458/UulVooeFW_I/AAAAAAAAAqQ/B0hS4a-EtCU/s1600/cao.jpg",
   ]
 };
