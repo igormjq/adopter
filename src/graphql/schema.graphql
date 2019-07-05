@@ -29,6 +29,15 @@ type Mutation {
   commentOnAnimal(animalId: ID!, text: String!): Animal! @auth
 }
 
+type Subscription {
+  adoptionRequest(id: ID!): AdoptionRequest!
+}
+
+type AdoptionRequestSubscriptionPayload {
+  mutation: String!
+  data: AdoptionRequest!
+}
+
 # USER
 type User {
   id: ID!

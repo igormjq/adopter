@@ -1,5 +1,5 @@
 export default {
-  async createAdoptionRequest(parent, { animalId }, { prisma, request }, info) {
+  async createAdoptionRequest(parent, { animalId }, { prisma, request, pubsub }, info) {
     const adoptionRequestExists = await prisma.exists.AdoptionRequest({
       animal: {
         id: animalId
@@ -11,7 +11,7 @@ export default {
     
     if(adoptionRequestExists) throw new Error('Solicitação de adoção já realizada.');
 
-    return await prisma.mutation.createAdoptionRequest({
+    const adoptionRequest = await prisma.mutation.createAdoptionRequest({
       data: {
         animal: {
           connect: {
@@ -25,8 +25,14 @@ export default {
         }
       }
     }, info);
+
+    // if(adoptionRequest) {
+    //   pubsub.publish(`adoptionRequest ${adoptionRequest.id}`, { adoptionRequest });
+    // }
+
+    return adoptionRequest;
   },
-  async acceptAdoptionRequest(parent, { id }, { prisma, request }, info) {
+  async acceptAdoptionRequest(parent, { id }, { prisma, request, pubsub }, info) {
     const checkUser = await prisma.exists.AdoptionRequest({
       id,
       animal: {
@@ -38,11 +44,15 @@ export default {
 
     if(!checkUser) throw new Error('Pedido não pertence ao usuário');
 
-    return await prisma.mutation.updateAdoptionRequest({
+    const adoptionRequest = await prisma.mutation.updateAdoptionRequest({
       where: { id },
       data: {
         accepted: true,
       }
     }, info);
+
+    pubsub.publish(`adoptionRequest ${adoptionRequest.id}`, { adoptionRequest });
+
+    return adoptionRequest;
   },
 };

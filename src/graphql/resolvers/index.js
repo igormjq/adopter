@@ -1,9 +1,11 @@
 import Query from './Query';
 import Mutation from './Mutation';
+import Subscription from './Subscription';
 
 export default {
   Query,
   Mutation,
+  Subscription,
   AuthPayload: {
     user: async ({ user: { id }}, args, { prisma }, info) => prisma.query.user({ where: { id }}, info) 
   },
