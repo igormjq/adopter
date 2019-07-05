@@ -20,7 +20,7 @@ export default async () => {
         email: "igormjq@gmail.com",
         password: (await bcrypt.hash('adopter', 10)),
         phone: "+5553981189503",
-        profileImg: faker.image.avatar(),
+        profileImg: "https://avatars3.githubusercontent.com/u/13663615?s=400&u=73b0dd1d802a5832f062ca68978b1d0df32afd59&v=4",
         role: {
           connect: {
             name: "ADMIN"
@@ -40,11 +40,11 @@ export default async () => {
 
     await prisma.mutation.createUser({
       data: {
-        name: "Miguel Novack Boanova",
-        email: "mgl.deadly@gmail.com",
+        name: "Angelo Luz",
+        email: "angelogl@gmail.com",
         password: (await bcrypt.hash('adopter', 10)),
         phone: "+5553981189503",
-        profileImg: faker.image.avatar(),
+        profileImg: "https://scontent-gru2-2.xx.fbcdn.net/v/t1.0-9/42664126_1876486449110077_383483559546978304_n.jpg?_nc_cat=111&_nc_oc=AQkOO-3_b52xdJSJdePJgQEMBkPJMOPkTbThaMZmBFUPN8Atf6_4GUp_IHqndt8POWc&_nc_ht=scontent-gru2-2.xx&oh=6a99d0c5fb406ade720f25bbd6710b18&oe=5DBB5CC9",
         role: {
           connect: {
             name: "PERSON"
