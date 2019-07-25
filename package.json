@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/www/index.js",
-    "heroku-postbuild": "babel src --out-dir dist --copy-files",
-    "dev": "env-cmd -f ./config/dev.env nodemon src/www/index.js --ext js,graphql --exec babel-node",
-    "get-schema": "env-cmd -f ./config/dev.env graphql get-schema -p prisma",
-    "db:seed": "env-cmd -f ./config/dev.env babel-node ./db/seeder/index.js",
-    "db:seed:prod": "env-cmd -f ./config/prod.env babel-node ./db/seeder/index.js"
+    "start": "nodemon src/www/index.js --ext js,graphql --exec babel-node",
+    "get-schema": "graphql get-schema -p prisma",
+    "db:seed": "babel-node ./db/seeder/index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +17,6 @@
     "body-parser": "^1.18.3",
     "chalk": "^2.4.2",
     "core-js": "^3.1.4",
-    "env-cmd": "^9.0.3",
     "graphql": "^14.2.1",
     "graphql-cli": "^3.0.11",
     "graphql-tools": "^4.0.4",
